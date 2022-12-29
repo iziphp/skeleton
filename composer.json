@@ -1,5 +1,5 @@
 {
-    "name": "phpstandard/app",
+    "name": "phpstandard/skeleton",
     "description": "Example application skeleton for PHP Standard Framework",
     "type": "project",
     "license": "MIT",
