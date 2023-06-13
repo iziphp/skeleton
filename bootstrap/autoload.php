@@ -8,13 +8,13 @@
 use PhpStandard\Autoloader\Autoloader;
 
 // Load vendors
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once "vendor/autoload.php";
 
 // Instantiate the loader
 $loader = new Autoloader();
 
 // Add namespaces to autoload
-$loader->appendNamespace(null, __DIR__ . "/../src"); # Root source
+$loader->appendNamespace(null, "src"); # Root source
 
 // Register the autoloader
 $loader->register();
