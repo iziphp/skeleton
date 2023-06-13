@@ -94,12 +94,10 @@ class Application
     }
 
     /**
-     * Invoke service providers
-     * 
      * @return void 
      * @throws NotFoundException 
      * @throws Throwable 
-     * @throws ApplicationException 
+     * @throws Exception 
      */
     private function invokeServiceProviders(): void
     {
@@ -109,7 +107,7 @@ class Application
             }
 
             if (!($provider instanceof ServiceProviderInterface)) {
-                throw new ApplicationException(sprintf(
+                throw new Exception(sprintf(
                     "%s must implement %s",
                     get_class($provider),
                     ServiceProviderInterface::class
@@ -121,12 +119,10 @@ class Application
     }
 
     /**
-     * Invoke bootstrappers
-     * 
      * @return void 
      * @throws NotFoundException 
      * @throws Throwable 
-     * @throws ApplicationException 
+     * @throws Exception 
      */
     private function invokeBootstrappers(): void
     {
@@ -136,7 +132,7 @@ class Application
             }
 
             if (!($bootstrapper instanceof BootstrapperInterface)) {
-                throw new ApplicationException(sprintf(
+                throw new Exception(sprintf(
                     "%s must implement %s",
                     get_class($bootstrapper),
                     BootstrapperInterface::class
