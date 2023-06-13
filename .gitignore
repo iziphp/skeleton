@@ -18,3 +18,7 @@ coverage
 
 # Keep empty directories
 !.gitkeep
+
+# .env files
+.env*
+!.env.*.example
