@@ -4,6 +4,9 @@ namespace Shared\Infrastructure\Bootstrappers;
 
 use Application;
 use Doctrine\DBAL\Tools\Console\ConnectionProvider;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+use Doctrine\Migrations\DependencyFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\ConnectionFromManagerProvider;
@@ -46,9 +49,17 @@ class ConsoleBootstrapper implements BootstrapperInterface
             $emp = new SingleManagerProvider($em);
             $cp = new ConnectionFromManagerProvider($emp);
 
+            $config = new PhpFile($this->basePath . '/config/migrations.php');
+
+            $df = DependencyFactory::fromEntityManager(
+                $config,
+                new ExistingEntityManager($em)
+            );
+
             $this->app
                 ->set(EntityManagerProvider::class, $emp)
-                ->set(ConnectionProvider::class, $cp);
+                ->set(ConnectionProvider::class, $cp)
+                ->set(DependencyFactory::class, $df);
         } else {
             $commands = [];
         }

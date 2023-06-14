@@ -33,7 +33,8 @@
         "doctrine/orm": "^2.15",
         "doctrine/dbal": "^3.6",
         "symfony/cache": "^6.3",
-        "symfony/console": "^6.3"
+        "symfony/console": "^6.3",
+        "doctrine/migrations": "^3.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",

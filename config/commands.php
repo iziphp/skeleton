@@ -2,9 +2,9 @@
 
 use Doctrine\DBAL\Tools\Console\Command\RunSqlCommand;
 use Doctrine\ORM\Tools\Console\Command as ORMCommand;
+use Doctrine\Migrations\Tools\Console\Command as MigrationsCommand;
 
 return [
-
     // Doctrine DBAL Commands
     'dbal:run-sql' => RunSqlCommand::class,
 
@@ -23,4 +23,19 @@ return [
     'orm:validate-schema' => ORMCommand\ValidateSchemaCommand::class,
     'orm:info' => ORMCommand\InfoCommand::class,
     'orm:mapping:describe' => ORMCommand\MappingDescribeCommand::class,
+
+    // Doctrine Migrations Commands
+    'migrations:current' => MigrationsCommand\CurrentCommand::class,
+    'migrations:diff' => MigrationsCommand\DiffCommand::class,
+    'migrations:dump-schema' => MigrationsCommand\DumpSchemaCommand::class,
+    'migrations:execute' => MigrationsCommand\ExecuteCommand::class,
+    'migrations:generate' => MigrationsCommand\GenerateCommand::class,
+    'migrations:latest' => MigrationsCommand\LatestCommand::class,
+    'migrations:list' => MigrationsCommand\ListCommand::class,
+    'migrations:migrate' => MigrationsCommand\MigrateCommand::class,
+    'migrations:rollup' => MigrationsCommand\RollupCommand::class,
+    'migrations:status' => MigrationsCommand\StatusCommand::class,
+    'migrations:sync-metadata-storage' => MigrationsCommand\SyncMetadataStorageCommand::class,
+    'migrations:up-to-date' => MigrationsCommand\UpToDateCommand::class,
+    'migrations:version' => MigrationsCommand\VersionCommand::class,
 ];
