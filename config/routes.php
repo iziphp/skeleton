@@ -11,4 +11,7 @@ $group->map('GET', '/', IndexRequestHandler::class);
 // Not found handler. Should be set as the lastest route
 $group->map('GET', '*', NotFoundRequestHandler::class);
 
-return $group;
+// Return an array of route groups or maps.
+return [
+    $group
+];
