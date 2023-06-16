@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\ConnectionFromManagerProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use PhpStandard\Container\Attributes\Inject;
 use Psr\Container\ContainerInterface;
 use Shared\Infrastructure\BootstrapperInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
@@ -22,7 +23,8 @@ class ConsoleBootstrapper implements BootstrapperInterface
     public function __construct(
         private ContainerInterface $container,
         private Application $app,
-        private string $basePath
+        #[Inject('config.root_dir')]
+        private string $rootDir
     ) {
     }
 
@@ -44,12 +46,12 @@ class ConsoleBootstrapper implements BootstrapperInterface
         }
 
         if ($em) {
-            $commands = require $this->basePath . '/config/commands.php';
+            $commands = require $this->rootDir . '/config/commands.php';
 
             $emp = new SingleManagerProvider($em);
             $cp = new ConnectionFromManagerProvider($emp);
 
-            $config = new PhpFile($this->basePath . '/config/migrations.php');
+            $config = new PhpFile($this->rootDir . '/config/migrations.php');
 
             $df = DependencyFactory::fromEntityManager(
                 $config,

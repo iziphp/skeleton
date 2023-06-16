@@ -11,7 +11,6 @@ $config->set('root_dir', $rootDir);
 $config->set('cache_dir', $rootDir . '/var/cache');
 
 $container = new Container();
-$container->set('basePath', $rootDir);
 $container->set('bootstrappers', require 'config/bootstrappers.php');
 $container->set('commands', require 'config/commands.php');
 $container->set('middlewares', require 'config/middlewares.php');

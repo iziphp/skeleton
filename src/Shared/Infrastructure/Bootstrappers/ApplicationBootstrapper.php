@@ -3,12 +3,14 @@
 namespace Shared\Infrastructure\Bootstrappers;
 
 use Dotenv\Dotenv;
+use PhpStandard\Container\Attributes\Inject;
 use Shared\Infrastructure\BootstrapperInterface;
 
 class ApplicationBootstrapper implements BootstrapperInterface
 {
     public function __construct(
-        private string $basePath
+        #[Inject('config.root_dir')]
+        private string $rootDir
     ) {
     }
 
@@ -30,7 +32,7 @@ class ApplicationBootstrapper implements BootstrapperInterface
     private function loadDotenv()
     {
         Dotenv::createImmutable(
-            $this->basePath
+            $this->rootDir
         )->load();
     }
 
@@ -41,7 +43,7 @@ class ApplicationBootstrapper implements BootstrapperInterface
      */
     private function loadHelperFunctions()
     {
-        require_once $this->basePath . '/helpers/helpers.php';
+        require_once $this->rootDir . '/helpers/helpers.php';
     }
 
     /**

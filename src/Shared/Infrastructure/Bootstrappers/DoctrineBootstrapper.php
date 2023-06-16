@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
 use Exception;
+use PhpStandard\Container\Attributes\Inject;
 use Shared\Infrastructure\BootstrapperInterface;
 use Shared\Infrastructure\EntityPathFactory;
 
@@ -16,7 +17,9 @@ class DoctrineBootstrapper implements BootstrapperInterface
     public function __construct(
         private Application $app,
         private EntityPathFactory $entityPathFactory,
-        private string $basePath
+
+        #[Inject('config.root_dir')]
+        private string $rootDir
     ) {
     }
 
@@ -37,7 +40,7 @@ class DoctrineBootstrapper implements BootstrapperInterface
 
     public function getEntityManager(array $params): EntityManagerInterface
     {
-        $proxyDir = $this->basePath . '/cache';
+        $proxyDir = $this->rootDir . '/cache';
 
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: $this->entityPathFactory->getPaths(),
