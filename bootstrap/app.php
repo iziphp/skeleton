@@ -12,25 +12,21 @@ use Shared\Infrastructure\ServiceProviderInterface;
  * @return ContainerInterface
  */
 
-// Make everything relative to the application root path.
+// Make everything relative to the application root directory.
 chdir(dirname(__DIR__));
 
 require __DIR__ . '/autoload.php';
 
-// Application base (root) path
-$basePath = dirname(__DIR__);
+/** @var Container $container */
+$container = require 'container.php';
 
 /** @var (ServiceProviderInterface|string)[] $providers */
-$providers = require 'config/providers.php';
+$providers = $container->get('providers');
 
 /** @var (BootstrapperInterface|string)[] $providers */
-$bootstrappers = require 'config/bootstrappers.php';
-
-$container = new Container();
-$container->set('basePath', $basePath);
+$bootstrappers = $container->get('bootstrappers');
 
 $app = new Application($container);
-
 $app->addServiceProvider(...$providers)
     ->addBootstrapper(...$bootstrappers)
     ->boot();
