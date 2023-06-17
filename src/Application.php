@@ -20,8 +20,11 @@ class Application
      * @return void 
      */
     public function __construct(
-        private Container $container
+        private Container $container,
+        private bool $isDebugModeEnabled = false
     ) {
+        $this->configErrorReporting();
+        $this->setDefaultTimezone();
         $this->container->set(Application::class, $this);
     }
 
@@ -141,5 +144,24 @@ class Application
 
             $bootstrapper->bootstrap();
         }
+    }
+
+    /**
+     * Configure error reporting
+     * @return void
+     */
+    private function configErrorReporting(): void
+    {
+        // Report all errors
+        error_reporting(E_ALL);
+
+        // Display error only if debug mode is enabled
+        ini_set('display_errors', $this->isDebugModeEnabled);
+    }
+
+    /** @return void  */
+    private function setDefaultTimezone(): void
+    {
+        date_default_timezone_set('UTC');
     }
 }

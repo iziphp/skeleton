@@ -1,5 +1,6 @@
 <?php
 
+use Dotenv\Dotenv;
 use Psr\Container\ContainerInterface;
 use PhpStandard\Container\Container;
 use Shared\Infrastructure\BootstrapperInterface;
@@ -15,7 +16,11 @@ use Shared\Infrastructure\ServiceProviderInterface;
 // Make everything relative to the application root directory.
 chdir(dirname(__DIR__));
 
+// Configure class autoloading
 require __DIR__ . '/autoload.php';
+
+// Load environment variables
+Dotenv::createImmutable('./')->load();
 
 /** @var Container $container */
 $container = require 'container.php';
@@ -23,10 +28,10 @@ $container = require 'container.php';
 /** @var (ServiceProviderInterface|string)[] $providers */
 $providers = $container->get('providers');
 
-/** @var (BootstrapperInterface|string)[] $providers */
+/** @var (BootstrapperInterface|string)[] $bootstrappers */
 $bootstrappers = $container->get('bootstrappers');
 
-$app = new Application($container);
+$app = new Application($container, env('DEBUG', false));
 $app->addServiceProvider(...$providers)
     ->addBootstrapper(...$bootstrappers)
     ->boot();

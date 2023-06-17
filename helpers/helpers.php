@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file will be autoloaded by Composer. 
+ * @see composer.json > autoload > files
+ */
+
 if (!function_exists('env')) {
     /**
      * Get env value

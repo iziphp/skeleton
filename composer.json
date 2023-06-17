@@ -82,5 +82,10 @@
             "type": "path",
             "url": "../http-server-dispatcher"
         }
-    ]
+    ],
+    "autoload": {
+        "files": [
+            "helpers/helpers.php"
+        ]
+    }
 }
