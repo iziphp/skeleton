@@ -28,7 +28,7 @@
         "phpstandard/command-bus": "^1.0",
         "phpstandard/emitter": "^2.0",
         "symfony/http-client": "^6.2",
-        "laminas/laminas-diactoros": "^2.24",
+        "laminas/laminas-diactoros": "^3.0",
         "vlucas/phpdotenv": "^5.5",
         "doctrine/orm": "^2.15",
         "doctrine/dbal": "^3.6",
@@ -37,7 +37,8 @@
         "doctrine/migrations": "^3.6",
         "adbario/php-dot-notation": "^3.3",
         "psr/cache": "^3.0",
-        "psr/simple-cache": "^3.0"
+        "psr/simple-cache": "^3.0",
+        "psr/http-factory": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
