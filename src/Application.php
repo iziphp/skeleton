@@ -80,23 +80,6 @@ class Application
     }
 
     /**
-     * This is a mirror of Container::setShared(). The purpose of this method is to
-     * decouple the ServiceProviderInterface implementation from the 
-     * ContainerInterface implementation.
-     * 
-     * @param string $abstract 
-     * @param mixed $concrete 
-     * @return Application 
-     */
-    public function setShared(
-        string $abstract,
-        mixed $concrete = null
-    ): self {
-        $this->container->setShared($abstract, $concrete);
-        return $this;
-    }
-
-    /**
      * @return void 
      * @throws NotFoundException 
      * @throws Throwable 
