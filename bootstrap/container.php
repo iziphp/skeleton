@@ -24,7 +24,6 @@ $container->set('commands', require 'config/commands.php');
 $container->set('middlewares', require 'config/middlewares.php');
 $container->set('migrations', require 'config/migrations.php');
 $container->set('providers', require 'config/providers.php');
-$container->set('routes', require 'config/routes.php');
 
 // Load config values to the container. Prefix them with 'config.'.
 // Use dot notation to access nested values.

@@ -3,24 +3,26 @@
 namespace Shared\Infrastructure\Bootstrappers;
 
 use PhpStandard\Container\Attributes\Inject;
-use PhpStandard\Router\Group;
-use PhpStandard\Router\Map;
-use PhpStandard\Router\Mapper;
+use PhpStandard\Router\Mapper\AttributeMapper;
 use Shared\Infrastructure\BootstrapperInterface;
 
 /** @package Shared\Infrastructure\Bootstrappers */
 class RoutingBootstrapper implements BootstrapperInterface
 {
     /**
-     * @param Mapper $mapper 
-     * @param array<int,Group|Map> $routes 
+     * @param AttributeMapper $mapper 
+     * @param array<string> $dirs 
+     * @param bool $enableCaching 
      * @return void 
      */
     public function __construct(
-        private Mapper $mapper,
+        private AttributeMapper $mapper,
 
-        #[Inject('routes')]
-        private array $routes
+        #[Inject('config.route_directories')]
+        private array $dirs,
+
+        #[Inject('config.enable_caching')]
+        private bool $enableCaching = false
     ) {
     }
 
@@ -29,8 +31,12 @@ class RoutingBootstrapper implements BootstrapperInterface
      */
     public function bootstrap(): void
     {
-        foreach ($this->routes as $group) {
-            $this->mapper->add($group);
+        foreach ($this->dirs as $dir) {
+            $this->mapper->addPath($dir);
         }
+
+        $this->enableCaching
+            ? $this->mapper->enableCaching()
+            : $this->mapper->disableCaching();
     }
 }
