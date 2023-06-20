@@ -20,8 +20,11 @@ class ServerRequestHandler implements RequestHandlerInterface
     {
         $route = $this->dispatcher->dispatch($request);
 
-        foreach ($route->getParams() as $param => $value) {
-            $request = $request->withAttribute($param, $value);
+        foreach ($route->getParams() as $param) {
+            $request = $request->withAttribute(
+                $param->getKey(),
+                $param->getValue()
+            );
         }
 
         $handler = new HttpServerHandler(
