@@ -14,6 +14,7 @@ $config = new Dot();
 $config->set('databases', []);
 $config->set('root_dir', $rootDir);
 $config->set('cache_dir', $rootDir . '/var/cache');
+$config->set('log_dir', $rootDir . '/var/log/');
 $config->set('enable_caching', env('ENVIRONMENT', 'dev') == 'prod');
 $config->set('route_directories', [$rootDir . '/src']);
 

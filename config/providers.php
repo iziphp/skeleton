@@ -5,8 +5,12 @@ use Shared\Infrastructure\Providers\EventServiceProvider;
 use Shared\Infrastructure\Providers\HttpClientServiceProvider;
 use Shared\Infrastructure\Providers\HttpFactoryServiceProvider;
 use Shared\Infrastructure\Providers\HttpServiceProvider;
+use Shared\Infrastructure\Providers\LoggerServiceProvider;
 
 return [
+    /** Define implementations for logger interfaces (PSR-3) */
+    LoggerServiceProvider::class,
+
     /** Define implementations for the event dispatcher interfaces (PSR-14) */
     EventServiceProvider::class,
 
