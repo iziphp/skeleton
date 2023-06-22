@@ -1,11 +1,15 @@
 <?php
 
 use Shared\Infrastructure\Providers\CacheServiceProvider;
+use Shared\Infrastructure\Providers\EventServiceProvider;
 use Shared\Infrastructure\Providers\HttpClientServiceProvider;
 use Shared\Infrastructure\Providers\HttpFactoryServiceProvider;
 use Shared\Infrastructure\Providers\HttpServiceProvider;
 
 return [
+    /** Define implementations for the event dispatcher interfaces (PSR-14) */
+    EventServiceProvider::class,
+
     /** Define implementations for cache interfaces (PSR-6, PSR-16)  */
     CacheServiceProvider::class,
 

@@ -24,7 +24,7 @@
         "phpstandard/container": "dev-main",
         "phpstandard/http-server-handler": "dev-main",
         "phpstandard/router": "2.x-dev",
-        "phpstandard/event-dispatcher": "^1.0",
+        "phpstandard/event-dispatcher": "2.x-dev",
         "phpstandard/command-bus": "^1.0",
         "phpstandard/emitter": "^2.0",
         "symfony/http-client": "^6.3",
@@ -86,6 +86,10 @@
         {
             "type": "path",
             "url": "../http-server-dispatcher"
+        },
+        {
+            "type": "path",
+            "url": "../event-dispatcher"
         }
     ],
     "autoload": {
