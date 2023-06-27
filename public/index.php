@@ -1,7 +1,7 @@
 <?php
 
+use Easy\Http\ResponseEmitter\EmitterInterface;
 use Laminas\Diactoros\ServerRequestFactory;
-use PhpStandard\Http\ResponseEmitter\EmitterInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

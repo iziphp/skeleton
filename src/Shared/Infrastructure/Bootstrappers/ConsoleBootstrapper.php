@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\ConnectionFromManagerProvider;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use PhpStandard\Container\Attributes\Inject;
+use Easy\Container\Attributes\Inject;
 use Psr\Container\ContainerInterface;
 use Shared\Infrastructure\BootstrapperInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;

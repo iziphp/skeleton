@@ -1,5 +1,5 @@
 {
-    "name": "phpstandard/skeleton",
+    "name": "iziphp/skeleton",
     "description": "Example application skeleton for PHP Standard Framework",
     "type": "project",
     "license": "MIT",
@@ -17,16 +17,15 @@
         "psr/http-server-middleware": "^1.0",
         "psr/http-client": "^1.0",
         "psr/event-dispatcher": "^1.0",
-        "phpstandard/http-server-dispatcher": "dev-main",
-        "phpstandard/http-response-emitter": "^1.0",
-        "phpstandard/http-message-util": "dev-main",
-        "phpstandard/autoloader": "^1.0",
-        "phpstandard/container": "dev-main",
-        "phpstandard/http-server-handler": "dev-main",
-        "phpstandard/router": "2.x-dev",
-        "phpstandard/event-dispatcher": "2.x-dev",
-        "phpstandard/command-bus": "^1.0",
-        "phpstandard/emitter": "^2.0",
+        "iziphp/http-server-dispatcher": "^1.0",
+        "iziphp/http-response-emitter": "^1.0",
+        "iziphp/http-message-util": "^1.0",
+        "iziphp/autoloader": "^1.0",
+        "iziphp/container": "^1.0",
+        "iziphp/http-server-handler": "^1.0",
+        "iziphp/router": "^1.0",
+        "iziphp/event-dispatcher": "^1.0",
+        "iziphp/emitter": "^1.0",
         "symfony/http-client": "^6.3",
         "laminas/laminas-diactoros": "^3.0",
         "vlucas/phpdotenv": "^5.5",
@@ -68,32 +67,6 @@
             "@phpcbf"
         ]
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../container"
-        },
-        {
-            "type": "path",
-            "url": "../app"
-        },
-        {
-            "type": "path",
-            "url": "../router"
-        },
-        {
-            "type": "path",
-            "url": "../http-server-handler"
-        },
-        {
-            "type": "path",
-            "url": "../http-server-dispatcher"
-        },
-        {
-            "type": "path",
-            "url": "../event-dispatcher"
-        }
-    ],
     "autoload": {
         "files": [
             "helpers/helpers.php"

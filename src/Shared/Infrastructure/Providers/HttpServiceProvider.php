@@ -3,14 +3,13 @@
 namespace Shared\Infrastructure\Providers;
 
 use Application;
-use PhpStandard\Emitter\SapiEmitter;
-use PhpStandard\Http\ResponseEmitter\EmitterInterface;
-use PhpStandard\Http\Server\DispatcherInterface;
-use PhpStandard\Router\Dispatcher;
-use PhpStandard\Router\Mapper\AttributeMapper;
-use PhpStandard\Router\MapperInterface;
+use Easy\Emitter\SapiEmitter;
+use Easy\Http\ResponseEmitter\EmitterInterface;
+use Easy\Http\Server\DispatcherInterface;
+use Easy\Router\Dispatcher;
 use Shared\Infrastructure\ServiceProviderInterface;
 
+/** @package Shared\Infrastructure\Providers */
 class HttpServiceProvider implements ServiceProviderInterface
 {
     /** @inheritDoc */
@@ -18,7 +17,6 @@ class HttpServiceProvider implements ServiceProviderInterface
     {
         $app
             ->set(EmitterInterface::class, SapiEmitter::class)
-            ->set(MapperInterface::class, AttributeMapper::class)
             ->set(DispatcherInterface::class, Dispatcher::class);
     }
 }

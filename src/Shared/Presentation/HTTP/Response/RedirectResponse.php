@@ -2,9 +2,9 @@
 
 namespace Shared\Presentation\HTTP\Response;
 
+use Easy\Http\Message\StatusCode;
 use Laminas\Diactoros\Exception\InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse as BaseResponse;
-use PhpStandard\Http\Message\StatusCodeEnum;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -14,14 +14,14 @@ class RedirectResponse extends BaseResponse implements ResponseInterface
     /**
      * @inheritDoc
      * @param string|UriInterface $uri 
-     * @param StatusCodeEnum $status 
+     * @param StatusCode $status 
      * @param array $headers 
      * @return void 
      * @throws InvalidArgumentException 
      */
     public function __construct(
         string|UriInterface $uri,
-        StatusCodeEnum $status = StatusCodeEnum::FOUND,
+        StatusCode $status = StatusCode::FOUND,
         array $headers = []
     ) {
         parent::__construct($uri, $status->value, $headers);

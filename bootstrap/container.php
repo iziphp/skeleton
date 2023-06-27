@@ -2,7 +2,7 @@
 
 use Adbar\Dot;
 use Dotenv\Dotenv;
-use PhpStandard\Container\Container;
+use Easy\Container\Container;
 
 $rootDir = dirname(__DIR__);
 

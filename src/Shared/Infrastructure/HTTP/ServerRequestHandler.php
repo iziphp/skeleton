@@ -2,8 +2,8 @@
 
 namespace Shared\Infrastructure\HTTP;
 
-use PhpStandard\Http\Server\DispatcherInterface;
-use PhpStandard\HttpServerHandler\HttpServerHandler;
+use Easy\Http\Server\DispatcherInterface;
+use Easy\HttpServerHandler\HttpServerHandler;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;

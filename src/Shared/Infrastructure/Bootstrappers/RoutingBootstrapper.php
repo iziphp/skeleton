@@ -2,27 +2,26 @@
 
 namespace Shared\Infrastructure\Bootstrappers;
 
-use PhpStandard\Container\Attributes\Inject;
-use PhpStandard\Router\Mapper\AttributeMapper;
+use Application;
+use Easy\Container\Attributes\Inject;
+use Easy\Router\Dispatcher;
+use Easy\Router\Mapper\AttributeMapper;
+use Psr\Cache\CacheItemPoolInterface;
 use Shared\Infrastructure\BootstrapperInterface;
 
 /** @package Shared\Infrastructure\Bootstrappers */
 class RoutingBootstrapper implements BootstrapperInterface
 {
-    /**
-     * @param AttributeMapper $mapper 
-     * @param array<string> $dirs 
-     * @param bool $enableCaching 
-     * @return void 
-     */
     public function __construct(
-        private AttributeMapper $mapper,
+        private Dispatcher $dispatcher,
 
         #[Inject('config.route_directories')]
         private array $dirs,
 
         #[Inject('config.enable_caching')]
-        private bool $enableCaching = false
+        private bool $enableCaching = false,
+
+        private ?CacheItemPoolInterface $cache = null,
     ) {
     }
 
@@ -31,12 +30,20 @@ class RoutingBootstrapper implements BootstrapperInterface
      */
     public function bootstrap(): void
     {
+        $this->dispatcher->pushMapper($this->getAttributeMapper());
+    }
+
+    private function getAttributeMapper(): AttributeMapper
+    {
+        $mapper = new AttributeMapper($this->cache);
         foreach ($this->dirs as $dir) {
-            $this->mapper->addPath($dir);
+            $mapper->addPath($dir);
         }
 
         $this->enableCaching
-            ? $this->mapper->enableCaching()
-            : $this->mapper->disableCaching();
+            ? $mapper->enableCaching()
+            : $mapper->disableCaching();
+
+        return $mapper;
     }
 }

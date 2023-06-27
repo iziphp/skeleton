@@ -4,7 +4,7 @@ namespace Shared\Infrastructure;
 
 use Application;
 
-/** @package PhpStandard\App */
+/** @package Shared\Infrastructure */
 interface ServiceProviderInterface
 {
     /**

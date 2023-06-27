@@ -2,16 +2,17 @@
 
 namespace Common\Presentation\UI\RequestHandlers;
 
+use Easy\Http\Message\RequestMethod;
+use Easy\Router\Attributes\Route;
+use Easy\Router\Priority;
 use Laminas\Diactoros\Exception\InvalidArgumentException;
-use PhpStandard\Http\Message\RequestMethodEnum;
-use PhpStandard\Router\Attributes\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Shared\Presentation\HTTP\Response\Response;
 
 /** @package Common\Presentation\UI\RequestHandlers */
-#[Route(path: '*', method: RequestMethodEnum::GET, priority: Route::PRIORITY_LOW)]
+#[Route(path: '*', method: RequestMethod::GET, priority: Priority::LOW)]
 class NotFoundRequestHandler implements RequestHandlerInterface
 {
     /**

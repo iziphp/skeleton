@@ -5,7 +5,7 @@
  * as well as 3rd party vendor libraries
  */
 
-use PhpStandard\Autoloader\Autoloader;
+use Easy\Autoloader\Autoloader;
 
 // Load vendors
 require_once "vendor/autoload.php";

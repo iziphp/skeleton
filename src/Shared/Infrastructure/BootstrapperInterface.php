@@ -2,7 +2,7 @@
 
 namespace Shared\Infrastructure;
 
-/** @package PhpStandard\App */
+/** @package Shared\Infrastructure */
 interface BootstrapperInterface
 {
     /**

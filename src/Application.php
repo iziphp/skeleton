@@ -1,12 +1,10 @@
 <?php
 
-use PhpStandard\App\Exceptions\ApplicationException;
-use PhpStandard\Container\Container;
-use PhpStandard\Container\Exceptions\NotFoundException;
+use Easy\Container\Container;
+use Easy\Container\Exceptions\NotFoundException;
 use Shared\Infrastructure\BootstrapperInterface;
 use Shared\Infrastructure\ServiceProviderInterface;
 
-/** @package PhpStandard\App */
 class Application
 {
     /** @var array<ServiceProviderInterface|string> */
@@ -54,7 +52,7 @@ class Application
      * @return void 
      * @throws NotFoundException 
      * @throws Throwable 
-     * @throws ApplicationException 
+     * @throws Exception 
      */
     public function boot(): void
     {

@@ -2,11 +2,11 @@
 
 namespace Shared\Presentation\HTTP\Response;
 
+use Easy\Http\Message\StatusCode;
 use Laminas\Diactoros\Exception\InvalidArgumentException;
 use Laminas\Diactoros\Exception\UnwritableStreamException;
 use Laminas\Diactoros\Exception\UnseekableStreamException;
 use Laminas\Diactoros\Response\JsonResponse as BaseJsonResponse;
-use PhpStandard\Http\Message\StatusCodeEnum;
 use Psr\Http\Message\ResponseInterface;
 
 /** @package Shared\UI\Response */
@@ -15,7 +15,7 @@ class JsonResponse extends BaseJsonResponse implements ResponseInterface
     /**
      * @inheritDoc
      * @param mixed $data 
-     * @param StatusCodeEnum $status 
+     * @param StatusCode $status 
      * @param array $headers 
      * @param int $encodingOptions 
      * @return void 
@@ -25,7 +25,7 @@ class JsonResponse extends BaseJsonResponse implements ResponseInterface
      */
     public function __construct(
         $data,
-        StatusCodeEnum $status = StatusCodeEnum::OK,
+        StatusCode $status = StatusCode::OK,
         array $headers = [],
         private int $encodingOptions = self::DEFAULT_JSON_FLAGS
     ) {

@@ -7,8 +7,8 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
+use Easy\Container\Attributes\Inject;
 use Exception;
-use PhpStandard\Container\Attributes\Inject;
 use Shared\Infrastructure\BootstrapperInterface;
 use Shared\Infrastructure\EntityPathFactory;
 

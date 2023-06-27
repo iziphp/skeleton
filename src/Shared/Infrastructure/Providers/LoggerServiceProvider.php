@@ -3,10 +3,10 @@
 namespace Shared\Infrastructure\Providers;
 
 use Application;
+use Easy\Container\Attributes\Inject;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
-use PhpStandard\Container\Attributes\Inject;
 use Psr\Log\LoggerInterface;
 use Shared\Infrastructure\ServiceProviderInterface;
 

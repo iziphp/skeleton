@@ -1,9 +1,9 @@
 # PHP Standard Application SKeleton
 
-Example application skeleton using the PHPStandard Framework
+Example application skeleton
 
 ## Installation
 
 ```
-composer create-project phpstandard/skeleton
+composer create-project iziphp/skeleton
 ```

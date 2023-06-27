@@ -3,9 +3,9 @@
 namespace Shared\Infrastructure\Providers;
 
 use Application;
-use PhpStandard\EventDispatcher\EventDispatcher;
-use PhpStandard\EventDispatcher\ListenerProvider;
-use PhpStandard\EventDispatcher\Mapper\EventAttributeMapper;
+use Easy\EventDispatcher\EventDispatcher;
+use Easy\EventDispatcher\ListenerProvider;
+use Easy\EventDispatcher\Mapper\EventAttributeMapper;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;

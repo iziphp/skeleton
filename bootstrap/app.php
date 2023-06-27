@@ -1,8 +1,8 @@
 <?php
 
 use Dotenv\Dotenv;
+use Easy\Container\Container;
 use Psr\Container\ContainerInterface;
-use PhpStandard\Container\Container;
 use Shared\Infrastructure\BootstrapperInterface;
 use Shared\Infrastructure\ServiceProviderInterface;
 
