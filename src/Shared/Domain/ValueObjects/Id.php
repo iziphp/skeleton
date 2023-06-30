@@ -14,7 +14,7 @@ class Id
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: "id", type: "integer", nullable: true)]
-    public readonly ?int $value;
+    private ?int $value;
 
     /**
      * @param null|int $value 
@@ -25,6 +25,12 @@ class Id
     {
         $this->ensureValueIsValid($value);
         $this->value = $value;
+    }
+
+    /** @return null|int  */
+    public function getValue(): ?int
+    {
+        return $this->value;
     }
 
     /**

@@ -140,7 +140,7 @@ class UserRepository extends AbstractRepository implements
         return match ($param) {
             SortParameter::ID => new SortKeyValue(
                 'id.value',
-                $cursor?->getId()->value,
+                $cursor?->getId()->getValue(),
             ),
             SortParameter::FIRST_NAME => new SortKeyValue(
                 'firstName.value',

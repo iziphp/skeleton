@@ -19,7 +19,7 @@ class UserResource implements JsonSerializable
         $u = $this->user;
 
         return [
-            'id' => $u->getId()->value,
+            'id' => $u->getId()->getValue(),
             'first_name' => $u->getFirstName()->value,
             'last_name' => $u->getLastName()->value,
             'email' => $u->getEmail()->value,

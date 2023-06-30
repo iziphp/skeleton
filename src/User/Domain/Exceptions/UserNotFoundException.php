@@ -16,7 +16,7 @@ class UserNotFoundException extends Exception
         parent::__construct(
             sprintf(
                 "User with id <%s> doesn't exists!",
-                $id->value
+                $id->getValue()
             ),
             $code,
             $previous
