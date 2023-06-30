@@ -1,0 +1,50 @@
+<?php
+
+namespace User\Application\CommandHandlers;
+
+use Iterator;
+use Shared\Domain\ValueObjects\CursorDirection;
+use User\Application\Commands\ListUsersCommand;
+use User\Domain\Entities\UserEntity;
+use User\Domain\Repositories\UserRepositoryInterface;
+use User\Domain\Services\UserReadService;
+
+class ListUsersCommandHandler
+{
+    public function __construct(
+        private UserRepositoryInterface $repo,
+        private UserReadService $service
+    ) {
+    }
+
+    /**
+     * @param ListUsersCommand $cmd 
+     * @return Iterator<UserEntity>
+     */
+    public function handle(ListUsersCommand $cmd): Iterator
+    {
+        $user = $cmd->cursor
+            ? $this->service->findUserOrFail($cmd->cursor)
+            : null;
+
+        $users = $this->repo;
+
+        if ($cmd->cursorDirection == CursorDirection::ENDING_BEFORE) {
+            $users = $users->orderAndSliceBefore(
+                $cmd->sortDirection,
+                $cmd->limit,
+                $cmd->orderBy,
+                $user
+            );
+        } else {
+            $users = $users->orderAndSliceAfter(
+                $cmd->sortDirection,
+                $cmd->limit,
+                $cmd->orderBy,
+                $user
+            );
+        }
+
+        return $users->getIterator();
+    }
+}

@@ -9,14 +9,12 @@ class SortKeyValue
 {
     /**
      * @param string $key
-     * @param null|string $value
+     * @param mixed $value
      * @return void
      */
     public function __construct(
         public readonly string $key,
-        public readonly ?string $value = null
+        public readonly mixed $value = null
     ) {
-        $this->key = $key;
-        $this->value = $value;
     }
 }

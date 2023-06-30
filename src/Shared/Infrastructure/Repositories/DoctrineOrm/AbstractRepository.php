@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\Repositories\DoctrineOrm;
 
+use ArrayIterator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -27,6 +28,7 @@ abstract class AbstractRepository implements RepositoryInterface
 {
     /** Doctrine's Entity Manager. Child classes may use it. */
     protected EntityManagerInterface $em;
+    private bool $reverseSort = false;
 
     /**
      * Visibility set to private for not exposing the query builder to child
@@ -59,7 +61,15 @@ abstract class AbstractRepository implements RepositoryInterface
      */
     public function getIterator(): Iterator
     {
-        yield from new Paginator($this->qb->getQuery());
+        $iterator = new Paginator($this->qb->getQuery());
+
+        if ($this->reverseSort) {
+            $iterator = new ArrayIterator(
+                array_reverse(iterator_to_array($iterator))
+            );
+        }
+
+        yield from $iterator;
     }
 
     /**
@@ -138,7 +148,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param SliceLimit $limit
      * @param null|SortKeyValue $sortKeyValue
      * @param null|Id $cursorId
-     * @return AbstractRepository
+     * @return static
      */
     protected function doOrderAndSliceAfter(
         string $repoAlias,
@@ -146,7 +156,7 @@ abstract class AbstractRepository implements RepositoryInterface
         SliceLimit $limit,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
-    ): self {
+    ): static {
         return $this->filter(
             static function (QueryBuilder $qb) use (
                 $repoAlias,
@@ -201,7 +211,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param SliceLimit $limit
      * @param null|SortKeyValue $sortKeyValue
      * @param null|Id $cursorId
-     * @return AbstractRepository
+     * @return static
      */
     public function doOrderAndSliceBefore(
         string $repoAlias,
@@ -209,7 +219,9 @@ abstract class AbstractRepository implements RepositoryInterface
         SliceLimit $limit,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
-    ): self {
+    ): static {
+        $this->reverseSort = true;
+
         return $this->filter(
             static function (QueryBuilder $qb) use (
                 $repoAlias,
