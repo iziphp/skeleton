@@ -40,7 +40,7 @@ class DoctrineBootstrapper implements BootstrapperInterface
 
     public function getEntityManager(array $params): EntityManagerInterface
     {
-        $proxyDir = $this->rootDir . '/cache';
+        $proxyDir = $this->rootDir . '/var/cache';
 
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: $this->entityPathFactory->getPaths(),
