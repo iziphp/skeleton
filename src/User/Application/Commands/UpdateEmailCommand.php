@@ -19,10 +19,10 @@ class UpdateEmailCommand
     public Password $password;
 
     /**
-     * @param string $id 
-     * @param string $email 
-     * @param string $password 
-     * @return void 
+     * @param string $id
+     * @param string $email
+     * @param string $password
+     * @return void
      */
     public function __construct(
         string $id,

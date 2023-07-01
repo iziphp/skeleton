@@ -12,10 +12,10 @@ use Throwable;
 class UserNotFoundException extends Exception
 {
     /**
-     * @param Id $id 
-     * @param int $code 
-     * @param null|Throwable $previous 
-     * @return void 
+     * @param Id $id
+     * @param int $code
+     * @param null|Throwable $previous
+     * @return void
      */
     public function __construct(
         private readonly Id $id,

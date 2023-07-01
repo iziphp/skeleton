@@ -16,9 +16,9 @@ class Email implements JsonSerializable
     public readonly string $value;
 
     /**
-     * @param string $value 
-     * @return void 
-     * @throws InvalidArgumentException 
+     * @param string $value
+     * @return void
+     * @throws InvalidArgumentException
      */
     public function __construct(string $value)
     {
@@ -33,9 +33,9 @@ class Email implements JsonSerializable
     }
 
     /**
-     * @param string $value 
-     * @return void 
-     * @throws InvalidArgumentException 
+     * @param string $value
+     * @return void
+     * @throws InvalidArgumentException
      */
     private function ensureValueIsValid(string $value)
     {

@@ -11,8 +11,8 @@ use JsonSerializable;
 class DateTimeResource implements JsonSerializable
 {
     /**
-     * @param null|DateTimeInterface $dateTime 
-     * @return void 
+     * @param null|DateTimeInterface $dateTime
+     * @return void
      */
     public function __construct(
         private ?DateTimeInterface $dateTime

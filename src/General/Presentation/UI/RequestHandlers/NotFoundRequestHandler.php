@@ -16,9 +16,9 @@ use Shared\Presentation\HTTP\Response\Response;
 class NotFoundRequestHandler implements RequestHandlerInterface
 {
     /**
-     * @param ServerRequestInterface $request 
-     * @return ResponseInterface 
-     * @throws InvalidArgumentException 
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws InvalidArgumentException
      */
     public function handle(
         ServerRequestInterface $request

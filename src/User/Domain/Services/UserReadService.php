@@ -13,8 +13,8 @@ use User\Domain\Repositories\UserRepositoryInterface;
 class UserReadService
 {
     /**
-     * @param UserRepositoryInterface $repo 
-     * @return void 
+     * @param UserRepositoryInterface $repo
+     * @return void
      */
     public function __construct(
         private UserRepositoryInterface $repo
@@ -22,9 +22,9 @@ class UserReadService
     }
 
     /**
-     * @param Id $id 
-     * @return UserEntity 
-     * @throws UserNotFoundException 
+     * @param Id $id
+     * @return UserEntity
+     * @throws UserNotFoundException
      */
     public function findUserOrFail(Id $id): UserEntity
     {

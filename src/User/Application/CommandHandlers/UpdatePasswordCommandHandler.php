@@ -14,8 +14,8 @@ use User\Domain\Services\UpdateUserService;
 class UpdatePasswordCommandHandler
 {
     /**
-     * @param UpdateUserService $service 
-     * @return void 
+     * @param UpdateUserService $service
+     * @return void
      */
     public function __construct(
         private UpdateUserService $service
@@ -23,10 +23,10 @@ class UpdatePasswordCommandHandler
     }
 
     /**
-     * @param UpdatePasswordCommand $cmd 
-     * @return UserEntity 
-     * @throws UserNotFoundException 
-     * @throws InvalidPasswordException 
+     * @param UpdatePasswordCommand $cmd
+     * @return UserEntity
+     * @throws UserNotFoundException
+     * @throws InvalidPasswordException
      */
     public function handle(UpdatePasswordCommand $cmd): UserEntity
     {

@@ -15,30 +15,30 @@ use IteratorAggregate;
  * actual repository interfaces. Repositories should not implement this
  * interface directly. Actualy repository interfaces may extend this interface.
  *
- * @package Shared\Domain\Repositories 
+ * @package Shared\Domain\Repositories
  */
 interface RepositoryInterface extends IteratorAggregate, Countable
 {
     /**
      * Returns the iterator of the collection after applying the filters
      *
-     * @return Iterator 
+     * @return Iterator
      */
     public function getIterator(): Iterator;
 
     /**
      * Return a slice of the collection
-     * 
-     * @param int $start 
-     * @param int $size 
-     * @return RepositoryInterface 
+     *
+     * @param int $start
+     * @param int $size
+     * @return RepositoryInterface
      */
     public function slice(int $start, int $size = 20): self;
 
     /**
      * Count entities in the filtered collection
      *
-     * @return int<0, \max>  
+     * @return int<0, \max>
      */
     public function count(): int;
 
@@ -46,7 +46,7 @@ interface RepositoryInterface extends IteratorAggregate, Countable
      * Flushes all changes to objects that have been queued up to now to the
      * database. This effectively synchronizes the in-memory state of managed
      * objects with permanent storage such as database.
-     * 
+     *
      * @return void
      */
     public function flush(): void;

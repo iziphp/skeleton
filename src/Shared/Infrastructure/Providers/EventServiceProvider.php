@@ -15,8 +15,8 @@ use Shared\Infrastructure\ServiceProviderInterface;
 class EventServiceProvider implements ServiceProviderInterface
 {
     /**
-     * @param ContainerInterface $container 
-     * @return void 
+     * @param ContainerInterface $container
+     * @return void
      */
     public function __construct(
         private ContainerInterface $container
@@ -26,7 +26,7 @@ class EventServiceProvider implements ServiceProviderInterface
     /** @inheritDoc */
     public function register(Application $app): void
     {
-        $provider = new ListenerProvider;
+        $provider = new ListenerProvider();
 
         // Add event mappers here. Multiple event mappers can be added.
         $provider->addMapper(new EventAttributeMapper($this->container));

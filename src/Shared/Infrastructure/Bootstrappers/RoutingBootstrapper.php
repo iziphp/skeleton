@@ -15,21 +15,18 @@ use Shared\Infrastructure\BootstrapperInterface;
 class RoutingBootstrapper implements BootstrapperInterface
 {
     /**
-     * @param Dispatcher $dispatcher 
-     * @param string $routeDir 
-     * @param bool $enableCaching 
-     * @param null|CacheItemPoolInterface $cache 
-     * @return void 
+     * @param Dispatcher $dispatcher
+     * @param string $routeDir
+     * @param bool $enableCaching
+     * @param null|CacheItemPoolInterface $cache
+     * @return void
      */
     public function __construct(
         private Dispatcher $dispatcher,
-
         #[Inject('config.dirs.src')]
         private string $routeDir,
-
         #[Inject('config.enable_caching')]
         private bool $enableCaching = false,
-
         private ?CacheItemPoolInterface $cache = null,
     ) {
     }

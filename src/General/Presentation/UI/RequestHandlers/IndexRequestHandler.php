@@ -14,8 +14,8 @@ use Shared\Presentation\HTTP\Response\JsonResponse;
 class IndexRequestHandler implements RequestHandlerInterface
 {
     /**
-     * @param ServerRequestInterface $request 
-     * @return ResponseInterface 
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
      */
     public function handle(
         ServerRequestInterface $request

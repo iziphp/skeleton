@@ -15,8 +15,8 @@ use User\Domain\Services\UpdateUserService;
 class UpdateEmailCommandHandler
 {
     /**
-     * @param UpdateUserService $service 
-     * @return void 
+     * @param UpdateUserService $service
+     * @return void
      */
     public function __construct(
         private UpdateUserService $service
@@ -24,11 +24,11 @@ class UpdateEmailCommandHandler
     }
 
     /**
-     * @param UpdateEmailCommand $cmd 
-     * @return UserEntity 
-     * @throws UserNotFoundException 
-     * @throws InvalidPasswordException 
-     * @throws EmailTakenException 
+     * @param UpdateEmailCommand $cmd
+     * @return UserEntity
+     * @throws UserNotFoundException
+     * @throws InvalidPasswordException
+     * @throws EmailTakenException
      */
     public function handle(UpdateEmailCommand $cmd): UserEntity
     {

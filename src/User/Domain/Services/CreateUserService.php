@@ -14,9 +14,9 @@ use User\Domain\Repositories\UserRepositoryInterface;
 class CreateUserService
 {
     /**
-     * @param UserRepositoryInterface $repo 
-     * @param EventDispatcherInterface $dispatcher 
-     * @return void 
+     * @param UserRepositoryInterface $repo
+     * @param EventDispatcherInterface $dispatcher
+     * @return void
      */
     public function __construct(
         private UserRepositoryInterface $repo,
@@ -25,9 +25,9 @@ class CreateUserService
     }
 
     /**
-     * @param UserEntity $user 
-     * @return void 
-     * @throws EmailTakenException 
+     * @param UserEntity $user
+     * @return void
+     * @throws EmailTakenException
      */
     public function createUser(UserEntity $user): void
     {

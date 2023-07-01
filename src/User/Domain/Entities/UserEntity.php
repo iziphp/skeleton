@@ -57,12 +57,12 @@ class UserEntity
     private ?DateTimeInterface $updatedAt = null;
 
     /**
-     * @param Email $email 
-     * @param Password $password 
-     * @param FirstName $firstName 
-     * @param LastName $lastName 
-     * @param Language $language 
-     * @return void 
+     * @param Email $email
+     * @param Password $password
+     * @param FirstName $firstName
+     * @param LastName $lastName
+     * @param Language $language
+     * @return void
      */
     public function __construct(
         Email $email,
@@ -99,8 +99,8 @@ class UserEntity
     }
 
     /**
-     * @param FirstName $firstName 
-     * @return UserEntity 
+     * @param FirstName $firstName
+     * @return UserEntity
      */
     public function setFirstName(FirstName $firstName): self
     {
@@ -115,8 +115,8 @@ class UserEntity
     }
 
     /**
-     * @param LastName $lastName 
-     * @return UserEntity 
+     * @param LastName $lastName
+     * @return UserEntity
      */
     public function setLastName(LastName $lastName): self
     {
@@ -131,8 +131,8 @@ class UserEntity
     }
 
     /**
-     * @param Language $language 
-     * @return UserEntity 
+     * @param Language $language
+     * @return UserEntity
      */
     public function setLanguage(Language $language): self
     {
@@ -154,11 +154,11 @@ class UserEntity
 
     /**
      * Password is required to change the email
-     * 
-     * @param Email $email 
-     * @param Password $password 
-     * @return UserEntity 
-     * @throws InvalidPasswordException 
+     *
+     * @param Email $email
+     * @param Password $password
+     * @return UserEntity
+     * @throws InvalidPasswordException
      */
     public function updateEmail(Email $email, Password $password): self
     {
@@ -170,11 +170,11 @@ class UserEntity
 
     /**
      * Current password is required to change the password
-     * 
-     * @param Password $currentPassword 
-     * @param Password $password 
-     * @return UserEntity 
-     * @throws InvalidPasswordException 
+     *
+     * @param Password $currentPassword
+     * @param Password $password
+     * @return UserEntity
+     * @throws InvalidPasswordException
      */
     public function updatePassword(
         Password $currentPassword,
@@ -195,9 +195,9 @@ class UserEntity
     }
 
     /**
-     * @param Password $password 
-     * @return bool 
-     * @throws InvalidPasswordException 
+     * @param Password $password
+     * @return bool
+     * @throws InvalidPasswordException
      */
     private function verifyUserPassword(Password $password): bool
     {
@@ -218,8 +218,8 @@ class UserEntity
     }
 
     /**
-     * @param Password $password 
-     * @return void 
+     * @param Password $password
+     * @return void
      */
     private function setPassword(Password $password): void
     {

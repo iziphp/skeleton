@@ -14,10 +14,10 @@ class EmptyResponse extends BaseResponse implements ResponseInterface
 {
     /**
      * @inheritDoc
-     * @param StatusCode $status 
-     * @param array $headers 
-     * @return void 
-     * @throws InvalidArgumentException 
+     * @param StatusCode $status
+     * @param array $headers
+     * @return void
+     * @throws InvalidArgumentException
      */
     public function __construct(
         StatusCode $status = StatusCode::NO_CONTENT,

@@ -10,8 +10,8 @@ use Application;
 interface ServiceProviderInterface
 {
     /**
-     * @param Application $app 
-     * @return void 
+     * @param Application $app
+     * @return void
      */
     public function register(Application $app): void;
 }

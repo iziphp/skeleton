@@ -8,9 +8,9 @@ namespace Shared\Infrastructure;
 interface BootstrapperInterface
 {
     /**
-     * Method must be invoked after registration 
+     * Method must be invoked after registration
      * of all ServiceProviderInterface implementations.
-     * @return void  
+     * @return void
      * */
     public function bootstrap(): void;
 }

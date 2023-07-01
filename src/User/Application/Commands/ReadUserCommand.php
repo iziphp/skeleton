@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 declare(strict_types=1);
 
 namespace User\Application\Commands;
@@ -17,8 +16,8 @@ class ReadUserCommand
     public Id $id;
 
     /**
-     * @param string $id 
-     * @return void 
+     * @param string $id
+     * @return void
      */
     public function __construct(string $id)
     {

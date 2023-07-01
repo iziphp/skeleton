@@ -14,11 +14,11 @@ class HtmlResponse extends BaseResponse implements ResponseInterface
 {
     /**
      * @inheritDoc
-     * @param mixed $html 
-     * @param StatusCode $status 
-     * @param array $headers 
-     * @return void 
-     * @throws InvalidArgumentException 
+     * @param mixed $html
+     * @param StatusCode $status
+     * @param array $headers
+     * @return void
+     * @throws InvalidArgumentException
      */
     public function __construct(
         $html,

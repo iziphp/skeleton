@@ -13,8 +13,8 @@ use User\Domain\Services\UpdateUserService;
 class UpdateUserCommandHandler
 {
     /**
-     * @param UpdateUserService $service 
-     * @return void 
+     * @param UpdateUserService $service
+     * @return void
      */
     public function __construct(
         private UpdateUserService $service
@@ -22,9 +22,9 @@ class UpdateUserCommandHandler
     }
 
     /**
-     * @param UpdateUserCommand $cmd 
-     * @return UserEntity 
-     * @throws UserNotFoundException 
+     * @param UpdateUserCommand $cmd
+     * @return UserEntity
+     * @throws UserNotFoundException
      */
     public function handle(UpdateUserCommand $cmd): UserEntity
     {

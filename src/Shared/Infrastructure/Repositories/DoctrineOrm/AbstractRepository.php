@@ -22,7 +22,7 @@ use Shared\Domain\ValueObjects\SortKeyValue;
  * repository implementation. This abstract repository implements the
  * RepositoryInterface contract in an immutable way.
  *
- * @package Shared\Infrastructure\Repositories\DoctrineOrm 
+ * @package Shared\Infrastructure\Repositories\DoctrineOrm
  */
 abstract class AbstractRepository implements RepositoryInterface
 {
@@ -38,12 +38,12 @@ abstract class AbstractRepository implements RepositoryInterface
     private QueryBuilder $qb;
 
     /**
-     * @param EntityManagerInterface $em 
-     * @param string $entityClass 
-     * @param string $alias 
-     * @return void 
-     * @throws InvalidArgumentException 
-     * @throws RuntimeException 
+     * @param EntityManagerInterface $em
+     * @param string $entityClass
+     * @param string $alias
+     * @return void
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -106,9 +106,9 @@ abstract class AbstractRepository implements RepositoryInterface
      *
      * Clones this repository and returns the new instance with the modified
      * query builder, so the original reference is preserved.
-     * 
-     * @param callable $filter 
-     * @return static 
+     *
+     * @param callable $filter
+     * @return static
      */
     protected function filter(callable $filter): self
     {
@@ -142,7 +142,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * ort repo entities and slice after provided cursor
-     * 
+     *
      * @param string $repoAlias
      * @param SortDirection $dir
      * @param SliceLimit $limit

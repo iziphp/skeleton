@@ -14,11 +14,11 @@ class Response extends BaseResponse implements ResponseInterface
 {
     /**
      * @inheritDoc
-     * @param string $body 
-     * @param StatusCode $status 
-     * @param array $headers 
-     * @return void 
-     * @throws InvalidArgumentException 
+     * @param string $body
+     * @param StatusCode $status
+     * @param array $headers
+     * @return void
+     * @throws InvalidArgumentException
      */
     public function __construct(
         $body = 'php://memory',

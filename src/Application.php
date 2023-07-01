@@ -17,8 +17,8 @@ class Application
     private array $bootstrappers = [];
 
     /**
-     * @param Container $container 
-     * @return void 
+     * @param Container $container
+     * @return void
      */
     public function __construct(
         private Container $container,
@@ -30,8 +30,8 @@ class Application
     }
 
     /**
-     * @param (ServiceProviderInterface|string)[] $providers 
-     * @return Application 
+     * @param (ServiceProviderInterface|string)[] $providers
+     * @return Application
      */
     public function addServiceProvider(
         ServiceProviderInterface|string ...$providers
@@ -41,8 +41,8 @@ class Application
     }
 
     /**
-     * @param (BootstrapperInterface|string)[] $bootstrappers 
-     * @return Application 
+     * @param (BootstrapperInterface|string)[] $bootstrappers
+     * @return Application
      */
     public function addBootstrapper(
         BootstrapperInterface|string ...$bootstrappers
@@ -52,10 +52,10 @@ class Application
     }
 
     /**
-     * @return void 
-     * @throws NotFoundException 
-     * @throws Throwable 
-     * @throws Exception 
+     * @return void
+     * @throws NotFoundException
+     * @throws Throwable
+     * @throws Exception
      */
     public function boot(): void
     {
@@ -65,12 +65,12 @@ class Application
 
     /**
      * This is a mirror of Container::set(). The purpose of this method is to
-     * decouple the ServiceProviderInterface implementation from the 
+     * decouple the ServiceProviderInterface implementation from the
      * ContainerInterface implementation.
-     * 
-     * @param string $abstract 
-     * @param mixed $concrete 
-     * @return Application 
+     *
+     * @param string $abstract
+     * @param mixed $concrete
+     * @return Application
      */
     public function set(
         string $abstract,
@@ -81,10 +81,10 @@ class Application
     }
 
     /**
-     * @return void 
-     * @throws NotFoundException 
-     * @throws Throwable 
-     * @throws Exception 
+     * @return void
+     * @throws NotFoundException
+     * @throws Throwable
+     * @throws Exception
      */
     private function invokeServiceProviders(): void
     {
@@ -106,10 +106,10 @@ class Application
     }
 
     /**
-     * @return void 
-     * @throws NotFoundException 
-     * @throws Throwable 
-     * @throws Exception 
+     * @return void
+     * @throws NotFoundException
+     * @throws Throwable
+     * @throws Exception
      */
     private function invokeBootstrappers(): void
     {

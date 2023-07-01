@@ -22,9 +22,9 @@ class Id implements JsonSerializable
     public readonly UuidInterface $value;
 
     /**
-     * @param null|string $value 
-     * @return void 
-     * @throws UnsupportedOperationException 
+     * @param null|string $value
+     * @return void
+     * @throws UnsupportedOperationException
      */
     public function __construct(?string $value = null)
     {

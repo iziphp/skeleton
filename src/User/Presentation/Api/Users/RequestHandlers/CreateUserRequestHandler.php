@@ -20,8 +20,8 @@ use User\Presentation\Api\Users\Resources\UserResource;
 class CreateUserRequestHandler implements RequestHandlerInterface
 {
     /**
-     * @param Dispatcher $dispatcher 
-     * @return void 
+     * @param Dispatcher $dispatcher
+     * @return void
      */
     public function __construct(
         private Dispatcher $dispatcher
@@ -29,9 +29,9 @@ class CreateUserRequestHandler implements RequestHandlerInterface
     }
 
     /**
-     * @param ServerRequestInterface $request 
-     * @return ResponseInterface 
-     * @throws NoHandlerFoundException 
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws NoHandlerFoundException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

@@ -12,7 +12,7 @@ class Handler
 {
     /**
      * @param class-string $className FQCN of the command/query handler
-     * @return void 
+     * @return void
      */
     public function __construct(
         public string $className

@@ -19,8 +19,8 @@ use User\Application\Commands\DeleteUserCommand;
 class DeleteUserRequestHandler implements RequestHandlerInterface
 {
     /**
-     * @param Dispatcher $dispatcher 
-     * @return void 
+     * @param Dispatcher $dispatcher
+     * @return void
      */
     public function __construct(
         private Dispatcher $dispatcher
@@ -28,9 +28,9 @@ class DeleteUserRequestHandler implements RequestHandlerInterface
     }
 
     /**
-     * @param ServerRequestInterface $request 
-     * @return ResponseInterface 
-     * @throws NoHandlerFoundException 
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws NoHandlerFoundException
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

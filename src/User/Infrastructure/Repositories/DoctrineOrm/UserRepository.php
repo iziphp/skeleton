@@ -31,10 +31,10 @@ class UserRepository extends AbstractRepository implements
     protected const ALIAS = 'user';
 
     /**
-     * @param EntityManagerInterface $em 
-     * @return void 
-     * @throws InvalidArgumentException 
-     * @throws RuntimeException 
+     * @param EntityManagerInterface $em
+     * @return void
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function __construct(EntityManagerInterface $em)
     {

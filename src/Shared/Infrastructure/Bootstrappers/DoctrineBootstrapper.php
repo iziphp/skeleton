@@ -22,17 +22,15 @@ use Shared\Infrastructure\BootstrapperInterface;
 class DoctrineBootstrapper implements BootstrapperInterface
 {
     /**
-     * @param Application $app 
-     * @param string $srcDir 
-     * @param string $proxyDir 
-     * @return void 
+     * @param Application $app
+     * @param string $srcDir
+     * @param string $proxyDir
+     * @return void
      */
     public function __construct(
         private Application $app,
-
         #[Inject('config.dirs.src')]
         private string $srcDir,
-
         #[Inject('config.dirs.cache')]
         private string $proxyDir
     ) {
@@ -56,11 +54,11 @@ class DoctrineBootstrapper implements BootstrapperInterface
     }
 
     /**
-     * @param array $params 
-     * @return EntityManagerInterface 
-     * @throws RuntimeException 
-     * @throws ErrorException 
-     * @throws DBALException 
+     * @param array $params
+     * @return EntityManagerInterface
+     * @throws RuntimeException
+     * @throws ErrorException
+     * @throws DBALException
      */
     private function getEntityManager(array $params): EntityManagerInterface
     {
@@ -75,8 +73,8 @@ class DoctrineBootstrapper implements BootstrapperInterface
     }
 
     /**
-     * @return null|array 
-     * @throws Exception 
+     * @return null|array
+     * @throws Exception
      */
     private function getConnectionParams(): ?array
     {
@@ -99,10 +97,10 @@ class DoctrineBootstrapper implements BootstrapperInterface
         return $connection;
     }
 
-    /** 
+    /**
      * Get connection config to create MySQL connection
-     * 
-     * @return array  
+     *
+     * @return array
      */
     private function getMysqlConnection(): array
     {

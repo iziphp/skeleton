@@ -22,11 +22,11 @@ class ServerRequestHandler implements RequestHandlerInterface
     }
 
     /**
-     * @param ServerRequestInterface $request 
-     * @return ResponseInterface 
-     * @throws DispatcherExceptionInterface 
-     * @throws MethodNotAllowedExceptionInterface 
-     * @throws RouteNotFoundExceptionInterface 
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws DispatcherExceptionInterface
+     * @throws MethodNotAllowedExceptionInterface
+     * @throws RouteNotFoundExceptionInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

@@ -15,8 +15,8 @@ class DeleteUserCommand
     public Id $id;
 
     /**
-     * @param string $id 
-     * @return void 
+     * @param string $id
+     * @return void
      */
     public function __construct(string $id)
     {

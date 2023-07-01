@@ -12,8 +12,8 @@ use Throwable;
 class ConfigResolver implements ResolverInterface
 {
     /**
-     * @param Config $config 
-     * @return void 
+     * @param Config $config
+     * @return void
      */
     public function __construct(private Config $config)
     {

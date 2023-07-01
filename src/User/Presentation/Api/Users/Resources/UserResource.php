@@ -12,8 +12,8 @@ use User\Domain\Entities\UserEntity;
 class UserResource implements JsonSerializable
 {
     /**
-     * @param UserEntity $user 
-     * @return void 
+     * @param UserEntity $user
+     * @return void
      */
     public function __construct(
         private UserEntity $user

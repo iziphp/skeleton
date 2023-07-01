@@ -11,7 +11,7 @@ class ListResource implements JsonSerializable
 {
     /**
      * @param array<JsonSerializable> $data
-     * @return void 
+     * @return void
      */
     public function __construct(
         private array $data = []
@@ -19,8 +19,8 @@ class ListResource implements JsonSerializable
     }
 
     /**
-     * @param JsonSerializable $data 
-     * @return void 
+     * @param JsonSerializable $data
+     * @return void
      */
     public function pushData(JsonSerializable $data): void
     {

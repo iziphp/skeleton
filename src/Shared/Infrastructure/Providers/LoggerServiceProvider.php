@@ -16,8 +16,8 @@ use Shared\Infrastructure\ServiceProviderInterface;
 class LoggerServiceProvider implements ServiceProviderInterface
 {
     /**
-     * @param string $logDir 
-     * @return void 
+     * @param string $logDir
+     * @return void
      */
     public function __construct(
         #[Inject('config.dirs.log')]

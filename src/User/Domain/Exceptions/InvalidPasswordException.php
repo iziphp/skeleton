@@ -16,11 +16,11 @@ class InvalidPasswordException extends Exception
     const TYPE_SAME_AS_OLD = 2;
 
     /**
-     * @param UserEntity $user 
-     * @param Password $password 
-     * @param int $code 
-     * @param Throwable|null $previous 
-     * @return void 
+     * @param UserEntity $user
+     * @param Password $password
+     * @param int $code
+     * @param Throwable|null $previous
+     * @return void
      */
     public function __construct(
         private readonly UserEntity $user,
@@ -48,8 +48,8 @@ class InvalidPasswordException extends Exception
     }
 
     /**
-     * @param int $code 
-     * @return string 
+     * @param int $code
+     * @return string
      */
     private function getMessageByCode(int $code): string
     {

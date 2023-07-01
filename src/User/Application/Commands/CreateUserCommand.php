@@ -23,12 +23,12 @@ class CreateUserCommand
     public Language $language;
 
     /**
-     * @param string $email 
-     * @param string $password 
-     * @param string $firstName 
-     * @param string $lastName 
-     * @param string $language 
-     * @return void 
+     * @param string $email
+     * @param string $password
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $language
+     * @return void
      */
     public function __construct(
         string $email,

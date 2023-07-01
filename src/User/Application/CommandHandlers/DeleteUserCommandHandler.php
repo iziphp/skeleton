@@ -12,8 +12,8 @@ use User\Domain\Services\DeleteUserService;
 class DeleteUserCommandHandler
 {
     /**
-     * @param DeleteUserService $service 
-     * @return void 
+     * @param DeleteUserService $service
+     * @return void
      */
     public function __construct(
         private DeleteUserService $service
@@ -21,9 +21,9 @@ class DeleteUserCommandHandler
     }
 
     /**
-     * @param DeleteUserCommand $cmd 
-     * @return void 
-     * @throws UserNotFoundException 
+     * @param DeleteUserCommand $cmd
+     * @return void
+     * @throws UserNotFoundException
      */
     public function handle(DeleteUserCommand $cmd): void
     {

@@ -21,7 +21,7 @@ class CacheServiceProvider implements ServiceProviderInterface
     {
         $app
             /**
-             * FilesystemAdapter is a concrete implementation of 
+             * FilesystemAdapter is a concrete implementation of
              * CacheItemPoolInterface. All of the its constructor arguments are
              * optional. Default cache location is system's temp directory.
              */
@@ -31,7 +31,7 @@ class CacheServiceProvider implements ServiceProviderInterface
              * Psr16Cache is a concrete implementation of CacheInterface. It
              * wraps a PSR-6 cache pool and provides a PSR-16 implementation
              * that can be used to store and retrieve values from the cache.
-             * 
+             *
              * Psr16Cache contructor requires a PSR-6 cache pool as its only
              * argument. We are using FilesystemAdapter as our PSR-6 cache pool
              * implementation (defined above).

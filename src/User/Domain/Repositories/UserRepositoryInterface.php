@@ -65,11 +65,11 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function createdBefore(DateTimeInterface $date): self;
 
     /**
-     * @param SortDirection $dir 
-     * @param SliceLimit $limit 
-     * @param null|SortParameter $param 
-     * @param null|UserEntity $cursor 
-     * @return UserRepositoryInterface 
+     * @param SortDirection $dir
+     * @param SliceLimit $limit
+     * @param null|SortParameter $param
+     * @param null|UserEntity $cursor
+     * @return UserRepositoryInterface
      */
     public function orderAndSliceAfter(
         SortDirection $dir,
@@ -79,11 +79,11 @@ interface UserRepositoryInterface extends RepositoryInterface
     ): self;
 
     /**
-     * @param SortDirection $dir 
-     * @param SliceLimit $limit 
-     * @param null|SortParameter $param 
-     * @param null|UserEntity $cursor 
-     * @return UserRepositoryInterface 
+     * @param SortDirection $dir
+     * @param SliceLimit $limit
+     * @param null|SortParameter $param
+     * @param null|UserEntity $cursor
+     * @return UserRepositoryInterface
      */
     public function orderAndSliceBefore(
         SortDirection $dir,

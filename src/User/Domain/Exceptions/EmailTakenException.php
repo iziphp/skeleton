@@ -12,10 +12,10 @@ use User\Domain\ValueObjects\Email;
 class EmailTakenException extends Exception
 {
     /**
-     * @param Email $email 
-     * @param int $code 
-     * @param null|Throwable $previous 
-     * @return void 
+     * @param Email $email
+     * @param int $code
+     * @param null|Throwable $previous
+     * @return void
      */
     public function __construct(
         private readonly Email $email,

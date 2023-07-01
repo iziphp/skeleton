@@ -24,10 +24,10 @@ use Throwable;
 class ConsoleBootstrapper implements BootstrapperInterface
 {
     /**
-     * @param ContainerInterface $container 
-     * @param Application $app 
-     * @param string $rootDir 
-     * @return void 
+     * @param ContainerInterface $container
+     * @param Application $app
+     * @param string $rootDir
+     * @return void
      */
     public function __construct(
         private ContainerInterface $container,

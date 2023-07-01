@@ -29,9 +29,9 @@ class ListUsersCommand
     }
 
     /**
-     * @param string $orderBy 
-     * @param string $dir 
-     * @return void 
+     * @param string $orderBy
+     * @param string $dir
+     * @return void
      */
     public function setOrderBy(string $orderBy, string $dir): void
     {
@@ -40,9 +40,9 @@ class ListUsersCommand
     }
 
     /**
-     * @param string $id 
-     * @param string $dir 
-     * @return ListUsersCommand 
+     * @param string $id
+     * @param string $dir
+     * @return ListUsersCommand
      */
     public function setCursor(string $id, string $dir = 'starting_after'): self
     {
@@ -53,8 +53,8 @@ class ListUsersCommand
     }
 
     /**
-     * @param int $limit 
-     * @return ListUsersCommand 
+     * @param int $limit
+     * @return ListUsersCommand
      */
     public function setLimit(int $limit): self
     {

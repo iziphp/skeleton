@@ -13,8 +13,8 @@ use User\Domain\Services\UserReadService;
 class ReadUserCommandHandler
 {
     /**
-     * @param UserReadService $service 
-     * @return void 
+     * @param UserReadService $service
+     * @return void
      */
     public function __construct(
         private UserReadService $service
@@ -22,9 +22,9 @@ class ReadUserCommandHandler
     }
 
     /**
-     * @param ReadUserCommand $query 
-     * @return UserEntity 
-     * @throws UserNotFoundException 
+     * @param ReadUserCommand $query
+     * @return UserEntity
+     * @throws UserNotFoundException
      */
     public function handle(ReadUserCommand $query): UserEntity
     {

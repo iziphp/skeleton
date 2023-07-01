@@ -18,10 +18,10 @@ class UpdatePasswordCommand
     public Password $newPassword;
 
     /**
-     * @param string $id 
-     * @param string $currentPassword 
-     * @param string $newPassword 
-     * @return void 
+     * @param string $id
+     * @param string $currentPassword
+     * @param string $newPassword
+     * @return void
      */
     public function __construct(
         string $id,

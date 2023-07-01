@@ -13,15 +13,15 @@ use Shared\Infrastructure\CommandBus\Exception\NoHandlerFoundException;
  * Dispatcher class for command and query handlers.
  *
  * Dispatches a command or query to its appropriate handler.
- * 
- * @package Shared\Infrastructure\CommandBus 
+ *
+ * @package Shared\Infrastructure\CommandBus
  */
 class Dispatcher
 {
     /**
      * Constructor method for the Dispatcher class.
      *
-     * @param ContainerInterface $container 
+     * @param ContainerInterface $container
      * The container used to manage dependencies.
      * @return void
      */
@@ -61,7 +61,7 @@ class Dispatcher
                 $ins = $attribute->newInstance();
                 $className = $ins->className;
 
-                // Retrieves the handler for the given command/query 
+                // Retrieves the handler for the given command/query
                 // from the container.
                 return $this->container->get($className);
             }

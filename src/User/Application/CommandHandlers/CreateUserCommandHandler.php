@@ -13,8 +13,8 @@ use User\Domain\Services\CreateUserService;
 class CreateUserCommandHandler
 {
     /**
-     * @param CreateUserService $service 
-     * @return void 
+     * @param CreateUserService $service
+     * @return void
      */
     public function __construct(
         private CreateUserService $service
@@ -22,9 +22,9 @@ class CreateUserCommandHandler
     }
 
     /**
-     * @param CreateUserCommand $cmd 
-     * @return UserEntity 
-     * @throws EmailTakenException 
+     * @param CreateUserCommand $cmd
+     * @return UserEntity
+     * @throws EmailTakenException
      */
     public function handle(CreateUserCommand $cmd): UserEntity
     {

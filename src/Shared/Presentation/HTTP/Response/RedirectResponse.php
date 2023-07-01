@@ -15,11 +15,11 @@ class RedirectResponse extends BaseResponse implements ResponseInterface
 {
     /**
      * @inheritDoc
-     * @param string|UriInterface $uri 
-     * @param StatusCode $status 
-     * @param array $headers 
-     * @return void 
-     * @throws InvalidArgumentException 
+     * @param string|UriInterface $uri
+     * @param StatusCode $status
+     * @param array $headers
+     * @return void
+     * @throws InvalidArgumentException
      */
     public function __construct(
         string|UriInterface $uri,

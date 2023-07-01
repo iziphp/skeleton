@@ -15,9 +15,9 @@ use User\Domain\Services\UserReadService;
 class ListUsersCommandHandler
 {
     /**
-     * @param UserRepositoryInterface $repo 
-     * @param UserReadService $service 
-     * @return void 
+     * @param UserRepositoryInterface $repo
+     * @param UserReadService $service
+     * @return void
      */
     public function __construct(
         private UserRepositoryInterface $repo,
@@ -26,7 +26,7 @@ class ListUsersCommandHandler
     }
 
     /**
-     * @param ListUsersCommand $cmd 
+     * @param ListUsersCommand $cmd
      * @return Iterator<UserEntity>
      */
     public function handle(ListUsersCommand $cmd): Iterator

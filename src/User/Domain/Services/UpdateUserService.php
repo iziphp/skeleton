@@ -16,9 +16,9 @@ use User\Domain\Repositories\UserRepositoryInterface;
 class UpdateUserService extends UserReadService
 {
     /**
-     * @param UserRepositoryInterface $repo 
-     * @param EventDispatcherInterface $dispatcher 
-     * @return void 
+     * @param UserRepositoryInterface $repo
+     * @param EventDispatcherInterface $dispatcher
+     * @return void
      */
     public function __construct(
         private UserRepositoryInterface $repo,
@@ -28,8 +28,8 @@ class UpdateUserService extends UserReadService
     }
 
     /**
-     * @param UserEntity $user 
-     * @return void 
+     * @param UserEntity $user
+     * @return void
      */
     public function updateUser(UserEntity $user): void
     {
@@ -45,8 +45,8 @@ class UpdateUserService extends UserReadService
     }
 
     /**
-     * @param UserEntity $user 
-     * @return void 
+     * @param UserEntity $user
+     * @return void
      */
     public function updatePassword(UserEntity $user): void
     {
@@ -58,9 +58,9 @@ class UpdateUserService extends UserReadService
     }
 
     /**
-     * @param UserEntity $user 
-     * @return void 
-     * @throws EmailTakenException 
+     * @param UserEntity $user
+     * @return void
+     * @throws EmailTakenException
      */
     public function updateEmail(UserEntity $user): void
     {

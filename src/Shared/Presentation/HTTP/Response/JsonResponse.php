@@ -16,14 +16,14 @@ class JsonResponse extends BaseJsonResponse implements ResponseInterface
 {
     /**
      * @inheritDoc
-     * @param mixed $data 
-     * @param StatusCode $status 
-     * @param array $headers 
-     * @param int $encodingOptions 
-     * @return void 
-     * @throws InvalidArgumentException 
-     * @throws UnwritableStreamException 
-     * @throws UnseekableStreamException 
+     * @param mixed $data
+     * @param StatusCode $status
+     * @param array $headers
+     * @param int $encodingOptions
+     * @return void
+     * @throws InvalidArgumentException
+     * @throws UnwritableStreamException
+     * @throws UnseekableStreamException
      */
     public function __construct(
         $data,

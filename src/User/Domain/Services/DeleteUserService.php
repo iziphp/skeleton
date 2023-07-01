@@ -13,9 +13,9 @@ use User\Domain\Repositories\UserRepositoryInterface;
 class DeleteUserService extends UserReadService
 {
     /**
-     * @param UserRepositoryInterface $repo 
-     * @param EventDispatcherInterface $dispatcher 
-     * @return void 
+     * @param UserRepositoryInterface $repo
+     * @param EventDispatcherInterface $dispatcher
+     * @return void
      */
     public function __construct(
         private UserRepositoryInterface $repo,
@@ -25,8 +25,8 @@ class DeleteUserService extends UserReadService
     }
 
     /**
-     * @param UserEntity $user 
-     * @return void 
+     * @param UserEntity $user
+     * @return void
      */
     public function deleteUser(UserEntity $user): void
     {

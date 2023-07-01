@@ -23,8 +23,8 @@ class UpdateUserCommand
     public bool $removeImage = false;
 
     /**
-     * @param string $id 
-     * @return void 
+     * @param string $id
+     * @return void
      */
     public function __construct(string $id)
     {
@@ -32,8 +32,8 @@ class UpdateUserCommand
     }
 
     /**
-     * @param string $value 
-     * @return UpdateUserCommand 
+     * @param string $value
+     * @return UpdateUserCommand
      */
     public function setFirstName(string $value): self
     {
@@ -42,8 +42,8 @@ class UpdateUserCommand
     }
 
     /**
-     * @param string $value 
-     * @return UpdateUserCommand 
+     * @param string $value
+     * @return UpdateUserCommand
      */
     public function setLastName(string $value): self
     {
@@ -53,8 +53,8 @@ class UpdateUserCommand
     }
 
     /**
-     * @param string $value 
-     * @return UpdateUserCommand 
+     * @param string $value
+     * @return UpdateUserCommand
      */
     public function setLanguage(string $value): self
     {

@@ -13,8 +13,8 @@ use User\Infrastructure\Repositories\DoctrineOrm\UserRepository;
 class UserModuleBootstrapper implements BootstrapperInterface
 {
     /**
-     * @param Application $app 
-     * @return void 
+     * @param Application $app
+     * @return void
      */
     public function __construct(
         private Application $app
