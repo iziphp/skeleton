@@ -15,8 +15,8 @@ class RoutingBootstrapper implements BootstrapperInterface
     public function __construct(
         private Dispatcher $dispatcher,
 
-        #[Inject('config.route_directories')]
-        private array $dirs,
+        #[Inject('config.dirs.src')]
+        private string $routeDir,
 
         #[Inject('config.enable_caching')]
         private bool $enableCaching = false,
@@ -36,9 +36,7 @@ class RoutingBootstrapper implements BootstrapperInterface
     private function getAttributeMapper(): AttributeMapper
     {
         $mapper = new AttributeMapper($this->cache);
-        foreach ($this->dirs as $dir) {
-            $mapper->addPath($dir);
-        }
+        $mapper->addPath($this->routeDir);
 
         $this->enableCaching
             ? $mapper->enableCaching()

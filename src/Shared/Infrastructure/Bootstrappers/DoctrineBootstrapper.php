@@ -10,16 +10,17 @@ use Doctrine\ORM\ORMSetup;
 use Easy\Container\Attributes\Inject;
 use Exception;
 use Shared\Infrastructure\BootstrapperInterface;
-use Shared\Infrastructure\EntityPathFactory;
 
 class DoctrineBootstrapper implements BootstrapperInterface
 {
     public function __construct(
         private Application $app,
-        private EntityPathFactory $entityPathFactory,
 
-        #[Inject('config.root_dir')]
-        private string $rootDir
+        #[Inject('config.dirs.src')]
+        private string $srcDir,
+
+        #[Inject('config.dirs.cache')]
+        private string $proxyDir
     ) {
     }
 
@@ -40,12 +41,10 @@ class DoctrineBootstrapper implements BootstrapperInterface
 
     public function getEntityManager(array $params): EntityManagerInterface
     {
-        $proxyDir = $this->rootDir . '/var/cache';
-
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            paths: $this->entityPathFactory->getPaths(),
+            paths: [$this->srcDir],
             isDevMode: true,
-            proxyDir: $proxyDir
+            proxyDir: $this->proxyDir
         );
 
         $connection = DriverManager::getConnection($params, $config);

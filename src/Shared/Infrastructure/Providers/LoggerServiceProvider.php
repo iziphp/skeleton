@@ -18,7 +18,7 @@ class LoggerServiceProvider implements ServiceProviderInterface
      * @return void 
      */
     public function __construct(
-        #[Inject('config.log_dir')]
+        #[Inject('config.dirs.log')]
         private string $logDir,
     ) {
     }

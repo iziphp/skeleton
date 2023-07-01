@@ -23,7 +23,7 @@ class ConsoleBootstrapper implements BootstrapperInterface
     public function __construct(
         private ContainerInterface $container,
         private Application $app,
-        #[Inject('config.root_dir')]
+        #[Inject('config.dirs.root')]
         private string $rootDir
     ) {
     }
