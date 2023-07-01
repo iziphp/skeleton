@@ -1,4 +1,4 @@
-# PHP Standard Application SKeleton
+# IziPHP Application Skeleton
 
 Example application skeleton
 

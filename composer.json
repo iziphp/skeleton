@@ -1,6 +1,6 @@
 {
     "name": "iziphp/skeleton",
-    "description": "Example application skeleton for PHP Standard Framework",
+    "description": "Example application skeleton",
     "type": "project",
     "license": "MIT",
     "authors": [
