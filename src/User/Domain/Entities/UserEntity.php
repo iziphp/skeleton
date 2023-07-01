@@ -7,6 +7,7 @@ namespace User\Domain\Entities;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Shared\Domain\ValueObjects\Id;
 use User\Domain\Exceptions\InvalidPasswordException;
 use User\Domain\ValueObjects\Email;
@@ -62,6 +63,7 @@ class UserEntity
         LastName $lastName,
         Language $language
     ) {
+        $this->id = new Id();
         $this->email = $email;
         $this->setPassword($password);
         $this->firstName = $firstName;

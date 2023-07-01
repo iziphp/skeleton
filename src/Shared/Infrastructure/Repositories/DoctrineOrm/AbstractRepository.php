@@ -197,7 +197,7 @@ abstract class AbstractRepository implements RepositoryInterface
                         );
                     }
 
-                    $qb->setParameter('id', $cursorId->getValue());
+                    $qb->setParameter('id', $cursorId->value->getBytes());
                 }
             }
         );
@@ -262,7 +262,7 @@ abstract class AbstractRepository implements RepositoryInterface
                         );
                     }
 
-                    $qb->setParameter('id', $cursorId->getValue());
+                    $qb->setParameter('id', $cursorId->value->getBytes());
                 } else {
                     if ($sortKeyValue) {
                         $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->value);

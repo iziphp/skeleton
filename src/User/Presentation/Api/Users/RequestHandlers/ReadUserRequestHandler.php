@@ -12,7 +12,7 @@ use Shared\Presentation\HTTP\Response\JsonResponse;
 use User\Application\Commands\ReadUserCommand;
 use User\Presentation\Api\Users\Resources\UserResource;
 
-#[Route(method: RequestMethod::GET, path: '/users/[i:id]')]
+#[Route(method: RequestMethod::GET, path: '/users/[s:id]')]
 class ReadUserRequestHandler implements RequestHandlerInterface
 {
     public function __construct(

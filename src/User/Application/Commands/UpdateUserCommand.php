@@ -19,7 +19,7 @@ class UpdateUserCommand
     public ?Id $image = null;
     public bool $removeImage = false;
 
-    public function __construct(int $id)
+    public function __construct(string $id)
     {
         $this->id = new Id($id);
     }

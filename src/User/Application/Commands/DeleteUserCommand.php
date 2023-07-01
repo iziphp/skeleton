@@ -11,7 +11,7 @@ class DeleteUserCommand
 {
     public Id $id;
 
-    public function __construct(int $id)
+    public function __construct(string $id)
     {
         $this->id = new Id($id);
     }

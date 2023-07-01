@@ -16,7 +16,7 @@ class UpdateEmailCommand
     public Password $password;
 
     public function __construct(
-        int $id,
+        string $id,
         string $email,
         string $password
     ) {

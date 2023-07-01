@@ -30,7 +30,7 @@ class ListUsersCommand
         $this->sortDirection = SortDirection::from(strtoupper($dir));
     }
 
-    public function setCursor(int $id, string $dir = 'starting_after'): self
+    public function setCursor(string $id, string $dir = 'starting_after'): self
     {
         $this->cursor = new Id($id);
         $this->cursorDirection = CursorDirection::from($dir);

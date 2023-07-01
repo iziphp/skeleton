@@ -15,7 +15,7 @@ class UpdatePasswordCommand
     public Password $newPassword;
 
     public function __construct(
-        int $id,
+        string $id,
         string $currentPassword,
         string $newPassword
     ) {

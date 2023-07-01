@@ -5,47 +5,24 @@ declare(strict_types=1);
 namespace Shared\Domain\ValueObjects;
 
 use Doctrine\ORM\Mapping as ORM;
-use InvalidArgumentException;
+use Ramsey\Uuid\Doctrine\UuidV7Generator;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /** @package Shared\Domain\ValueObjects */
 #[ORM\Embeddable]
 class Id
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: "id", type: "integer", nullable: true)]
-    private ?int $value;
+    #[ORM\Column(name: "id", type: "uuid", unique: true)]
+    #[ORM\GeneratedValue(strategy: "NONE")]
+    #[ORM\CustomIdGenerator(class: UuidV7Generator::class)]
+    public readonly UuidInterface $value;
 
-    /**
-     * @param null|int $value 
-     * @return void 
-     * @throws InvalidArgumentException 
-     */
-    public function __construct(?int $value = null)
+    public function __construct(?string $value = null)
     {
-        $this->ensureValueIsValid($value);
-        $this->value = $value;
-    }
-
-    /** @return null|int  */
-    public function getValue(): ?int
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param null|int $value 
-     * @return void 
-     * @throws InvalidArgumentException 
-     */
-    private function ensureValueIsValid(?int $value): void
-    {
-        if (!is_null($value) && $value < 1) {
-            throw new InvalidArgumentException(sprintf(
-                '<%s> does not allow the value <%s>.',
-                static::class,
-                $value
-            ));
-        }
+        $this->value = is_null($value)
+            ? Uuid::uuid7()
+            : Uuid::fromString($value);
     }
 }

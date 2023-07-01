@@ -4,11 +4,13 @@ namespace Shared\Infrastructure\Bootstrappers;
 
 use Application;
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
 use Easy\Container\Attributes\Inject;
 use Exception;
+use Ramsey\Uuid\Doctrine\UuidBinaryType;
 use Shared\Infrastructure\BootstrapperInterface;
 
 class DoctrineBootstrapper implements BootstrapperInterface
@@ -31,8 +33,12 @@ class DoctrineBootstrapper implements BootstrapperInterface
     {
         $params = $this->getConnectionParams();
 
+        Type::addType('uuid', UuidBinaryType::class);
+
         if ($params) {
             $em = $this->getEntityManager($params);
+            $em->getConnection()->getDatabasePlatform()
+                ->registerDoctrineTypeMapping('uuid', 'binary');
 
             $this->app
                 ->set(EntityManagerInterface::class, $em);
