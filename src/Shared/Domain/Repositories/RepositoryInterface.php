@@ -38,7 +38,7 @@ interface RepositoryInterface extends IteratorAggregate, Countable
     /**
      * Count entities in the filtered collection
      *
-     * @return int<0, \max>
+     * @return int
      */
     public function count(): int;
 

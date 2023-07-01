@@ -20,6 +20,6 @@
     <rule ref="PHPCompatibility" />
 
     <!-- Check for cross-version support for PHP 8.1 and higher. -->
-    <config name="testVersion" value="8.1-" />
+    <config name="testVersion" value="8.2-" />
     <config name="installed_paths" value="vendor/phpcompatibility/php-compatibility" />
 </ruleset>

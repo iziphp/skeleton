@@ -27,8 +27,7 @@ class UserModuleBootstrapper implements BootstrapperInterface
         // Register repository implementations
         $this->app->set(
             UserRepositoryInterface::class,
-            UserRepository::class,
-            true
+            UserRepository::class
         );
     }
 }

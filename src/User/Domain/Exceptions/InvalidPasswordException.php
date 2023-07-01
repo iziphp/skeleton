@@ -12,8 +12,8 @@ use User\Domain\ValueObjects\Password;
 /** @package User\Domain\Exceptions */
 class InvalidPasswordException extends Exception
 {
-    const TYPE_INCORRECT = 1;
-    const TYPE_SAME_AS_OLD = 2;
+    public const TYPE_INCORRECT = 1;
+    public const TYPE_SAME_AS_OLD = 2;
 
     /**
      * @param UserEntity $user

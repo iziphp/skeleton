@@ -29,7 +29,7 @@ class JsonResponse extends BaseJsonResponse implements ResponseInterface
         $data,
         StatusCode $status = StatusCode::OK,
         array $headers = [],
-        private int $encodingOptions = self::DEFAULT_JSON_FLAGS
+        int $encodingOptions = self::DEFAULT_JSON_FLAGS
     ) {
         parent::__construct(
             $data,

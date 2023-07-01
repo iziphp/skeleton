@@ -44,7 +44,7 @@ class ListUsersRequestHandler implements RequestHandlerInterface
             $sort = explode(':', $sort);
             $orderBy = $sort[0];
             $dir = $sort[1] ?? 'desc';
-            $cmd->setOrderBy($orderBy, $dir ?? 'desc');
+            $cmd->setOrderBy($orderBy, $dir);
         }
 
         if ($cursor = $request->getQueryParams()['starting_after'] ?? null) {

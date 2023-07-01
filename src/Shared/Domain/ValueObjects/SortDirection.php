@@ -13,9 +13,11 @@ enum SortDirection: string
     /** @return SortDirection  */
     public function getOpposite(): SortDirection
     {
+        // phpcs:disable
         return match ($this) {
             self::ASC => self::DESC,
             self::DESC => self::ASC,
         };
+        // phpcs:disable
     }
 }

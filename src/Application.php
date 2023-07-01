@@ -1,5 +1,6 @@
 <?php
 
+// phpcs:disable PSR1.Classes
 declare(strict_types=1);
 
 use Easy\Container\Container;
@@ -30,7 +31,7 @@ class Application
     }
 
     /**
-     * @param (ServiceProviderInterface|string)[] $providers
+     * @param (ServiceProviderInterface|string)[] ...$providers
      * @return Application
      */
     public function addServiceProvider(
@@ -41,7 +42,7 @@ class Application
     }
 
     /**
-     * @param (BootstrapperInterface|string)[] $bootstrappers
+     * @param (BootstrapperInterface|string)[] ...$bootstrappers
      * @return Application
      */
     public function addBootstrapper(
@@ -94,7 +95,7 @@ class Application
             }
 
             if (!($provider instanceof ServiceProviderInterface)) {
-                throw new Exception(sprintf(
+                throw new \Exception(sprintf(
                     "%s must implement %s",
                     get_class($provider),
                     ServiceProviderInterface::class
@@ -119,7 +120,7 @@ class Application
             }
 
             if (!($bootstrapper instanceof BootstrapperInterface)) {
-                throw new Exception(sprintf(
+                throw new \Exception(sprintf(
                     "%s must implement %s",
                     get_class($bootstrapper),
                     BootstrapperInterface::class
