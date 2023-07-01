@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Infrastructure\Providers;
 
 use Application;
@@ -17,6 +19,7 @@ use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Shared\Infrastructure\ServiceProviderInterface;
 
+/** @package Shared\Infrastructure\Providers */
 class HttpFactoryServiceProvider implements ServiceProviderInterface
 {
     /**

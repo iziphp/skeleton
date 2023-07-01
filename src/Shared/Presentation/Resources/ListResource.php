@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Presentation\Resources;
 
 use JsonSerializable;
 
+/** @package Shared\Presentation\Resources */
 class ListResource implements JsonSerializable
 {
     /**
@@ -15,11 +18,16 @@ class ListResource implements JsonSerializable
     ) {
     }
 
+    /**
+     * @param JsonSerializable $data 
+     * @return void 
+     */
     public function pushData(JsonSerializable $data): void
     {
         $this->data[] = $data;
     }
 
+    /** @inheritDoc */
     public function jsonSerialize(): mixed
     {
         return [

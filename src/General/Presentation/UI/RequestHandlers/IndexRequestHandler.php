@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Shared\Presentation\HTTP\Response\JsonResponse;
 
-/** @package Common\Presentation\UI\RequestHandlers */
+/** @package General\Presentation\UI\RequestHandlers */
 #[Route(path: '/', method: RequestMethod::GET)]
 class IndexRequestHandler implements RequestHandlerInterface
 {

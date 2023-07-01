@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Shared\Presentation\HTTP\Response\Response;
 
-/** @package Common\Presentation\UI\RequestHandlers */
+/** @package General\Presentation\UI\RequestHandlers */
 #[Route(path: '*', method: RequestMethod::GET, priority: Priority::LOW)]
 class NotFoundRequestHandler implements RequestHandlerInterface
 {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Presentation\HTTP\Response;
 
 use Easy\Http\Message\StatusCode;

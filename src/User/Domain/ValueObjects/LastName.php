@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Domain\ValueObjects;
 
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
 use JsonSerializable;
 
+/** @package User\Domain\ValueObjects */
 #[ORM\Embeddable]
 class LastName implements JsonSerializable
 {

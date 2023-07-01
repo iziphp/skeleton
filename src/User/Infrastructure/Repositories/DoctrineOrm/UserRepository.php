@@ -11,6 +11,8 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use DomainException;
+use InvalidArgumentException;
+use RuntimeException;
 use Shared\Domain\ValueObjects\Id;
 use Shared\Domain\ValueObjects\SortDirection;
 use Shared\Domain\ValueObjects\SliceLimit;
@@ -21,12 +23,19 @@ use User\Domain\Repositories\UserRepositoryInterface;
 use User\Domain\ValueObjects\Email;
 use User\Domain\ValueObjects\SortParameter;
 
+/** @package User\Infrastructure\Repositories\DoctrineOrm */
 class UserRepository extends AbstractRepository implements
     UserRepositoryInterface
 {
     protected const ENTITY_CLASS = UserEntity::class;
     protected const ALIAS = 'user';
 
+    /**
+     * @param EntityManagerInterface $em 
+     * @return void 
+     * @throws InvalidArgumentException 
+     * @throws RuntimeException 
+     */
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em, self::ENTITY_CLASS, self::ALIAS);

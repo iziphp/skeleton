@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Application\Commands;
 
 use Shared\Domain\ValueObjects\Id;
@@ -8,6 +10,7 @@ use User\Application\CommandHandlers\UpdateEmailCommandHandler;
 use User\Domain\ValueObjects\Email;
 use User\Domain\ValueObjects\Password;
 
+/** @package User\Application\Commands */
 #[Handler(UpdateEmailCommandHandler::class)]
 class UpdateEmailCommand
 {
@@ -15,6 +18,12 @@ class UpdateEmailCommand
     public Email $email;
     public Password $password;
 
+    /**
+     * @param string $id 
+     * @param string $email 
+     * @param string $password 
+     * @return void 
+     */
     public function __construct(
         string $id,
         string $email,

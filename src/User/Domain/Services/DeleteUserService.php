@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Domain\Services;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -7,8 +9,14 @@ use User\Domain\Entities\UserEntity;
 use User\Domain\Events\UserDeletedEvent;
 use User\Domain\Repositories\UserRepositoryInterface;
 
+/** @package User\Domain\Services */
 class DeleteUserService extends UserReadService
 {
+    /**
+     * @param UserRepositoryInterface $repo 
+     * @param EventDispatcherInterface $dispatcher 
+     * @return void 
+     */
     public function __construct(
         private UserRepositoryInterface $repo,
         private EventDispatcherInterface $dispatcher
@@ -16,6 +24,10 @@ class DeleteUserService extends UserReadService
         parent::__construct($repo);
     }
 
+    /**
+     * @param UserEntity $user 
+     * @return void 
+     */
     public function deleteUser(UserEntity $user): void
     {
         // Delete the user from the repository

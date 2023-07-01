@@ -7,6 +7,7 @@ namespace Shared\Domain\ValueObjects;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 use Ramsey\Uuid\Doctrine\UuidV7Generator;
+use Ramsey\Uuid\Exception\UnsupportedOperationException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -20,6 +21,11 @@ class Id implements JsonSerializable
     #[ORM\CustomIdGenerator(class: UuidV7Generator::class)]
     public readonly UuidInterface $value;
 
+    /**
+     * @param null|string $value 
+     * @return void 
+     * @throws UnsupportedOperationException 
+     */
     public function __construct(?string $value = null)
     {
         $this->value = is_null($value)

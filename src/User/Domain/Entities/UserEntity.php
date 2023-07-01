@@ -7,7 +7,6 @@ namespace User\Domain\Entities;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
 use Shared\Domain\ValueObjects\Id;
 use User\Domain\Exceptions\InvalidPasswordException;
 use User\Domain\ValueObjects\Email;
@@ -17,6 +16,7 @@ use User\Domain\ValueObjects\LastName;
 use User\Domain\ValueObjects\Password;
 use User\Domain\ValueObjects\PasswordHash;
 
+/** @package User\Domain\Entities */
 #[ORM\Entity]
 #[ORM\Table(name: 'user')]
 class UserEntity
@@ -56,6 +56,14 @@ class UserEntity
     #[ORM\Column(type: 'datetime', name: 'updated_at', nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
 
+    /**
+     * @param Email $email 
+     * @param Password $password 
+     * @param FirstName $firstName 
+     * @param LastName $lastName 
+     * @param Language $language 
+     * @return void 
+     */
     public function __construct(
         Email $email,
         Password $password,
@@ -72,65 +80,86 @@ class UserEntity
         $this->createdAt = new DateTime();
     }
 
+    /** @return Id  */
     public function getId(): Id
     {
         return $this->id;
     }
 
+    /** @return Email  */
     public function getEmail(): Email
     {
         return $this->email;
     }
 
-    // public function getPasswordHash(): PasswordHash
-    // {
-    //     return $this->passwordHash;
-    // }
-
+    /** @return FirstName  */
     public function getFirstName(): FirstName
     {
         return $this->firstName;
     }
 
+    /**
+     * @param FirstName $firstName 
+     * @return UserEntity 
+     */
     public function setFirstName(FirstName $firstName): self
     {
         $this->firstName = $firstName;
         return $this;
     }
 
+    /** @return LastName  */
     public function getLastName(): LastName
     {
         return $this->lastName;
     }
 
+    /**
+     * @param LastName $lastName 
+     * @return UserEntity 
+     */
     public function setLastName(LastName $lastName): self
     {
         $this->lastName = $lastName;
         return $this;
     }
 
+    /** @return Language  */
     public function getLanguage(): Language
     {
         return $this->language;
     }
 
+    /**
+     * @param Language $language 
+     * @return UserEntity 
+     */
     public function setLanguage(Language $language): self
     {
         $this->language = $language;
         return $this;
     }
 
+    /** @return DateTimeInterface  */
     public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /** @return null|DateTimeInterface  */
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    // Password is required to change the email
+    /**
+     * Password is required to change the email
+     * 
+     * @param Email $email 
+     * @param Password $password 
+     * @return UserEntity 
+     * @throws InvalidPasswordException 
+     */
     public function updateEmail(Email $email, Password $password): self
     {
         $this->verifyUserPassword($password);
@@ -139,7 +168,14 @@ class UserEntity
         return $this;
     }
 
-    // Current password is required to change the password
+    /**
+     * Current password is required to change the password
+     * 
+     * @param Password $currentPassword 
+     * @param Password $password 
+     * @return UserEntity 
+     * @throws InvalidPasswordException 
+     */
     public function updatePassword(
         Password $currentPassword,
         Password $password
@@ -158,6 +194,11 @@ class UserEntity
         return $this;
     }
 
+    /**
+     * @param Password $password 
+     * @return bool 
+     * @throws InvalidPasswordException 
+     */
     private function verifyUserPassword(Password $password): bool
     {
         if (
@@ -176,6 +217,10 @@ class UserEntity
         return true;
     }
 
+    /**
+     * @param Password $password 
+     * @return void 
+     */
     private function setPassword(Password $password): void
     {
         $this->passwordHash = new PasswordHash(
@@ -183,6 +228,7 @@ class UserEntity
         );
     }
 
+    /** @return void  */
     public function preUpdate(): void
     {
         $this->updatedAt = new DateTime();

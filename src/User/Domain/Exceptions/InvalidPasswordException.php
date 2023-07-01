@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Domain\Exceptions;
 
 use Exception;
@@ -7,11 +9,19 @@ use Throwable;
 use User\Domain\Entities\UserEntity;
 use User\Domain\ValueObjects\Password;
 
+/** @package User\Domain\Exceptions */
 class InvalidPasswordException extends Exception
 {
     const TYPE_INCORRECT = 1;
     const TYPE_SAME_AS_OLD = 2;
 
+    /**
+     * @param UserEntity $user 
+     * @param Password $password 
+     * @param int $code 
+     * @param Throwable|null $previous 
+     * @return void 
+     */
     public function __construct(
         private readonly UserEntity $user,
         private readonly Password $password,
@@ -25,16 +35,22 @@ class InvalidPasswordException extends Exception
         );
     }
 
+    /** @return UserEntity  */
     public function getUser(): UserEntity
     {
         return $this->user;
     }
 
+    /** @return Password  */
     public function getPassword(): Password
     {
         return $this->password;
     }
 
+    /**
+     * @param int $code 
+     * @return string 
+     */
     private function getMessageByCode(int $code): string
     {
         switch ($code) {

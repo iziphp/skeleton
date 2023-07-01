@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Infrastructure\Bootstrappers;
 
 use Application;
@@ -18,8 +20,15 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Throwable;
 
+/** @package Shared\Infrastructure\Bootstrappers */
 class ConsoleBootstrapper implements BootstrapperInterface
 {
+    /**
+     * @param ContainerInterface $container 
+     * @param Application $app 
+     * @param string $rootDir 
+     * @return void 
+     */
     public function __construct(
         private ContainerInterface $container,
         private Application $app,
@@ -28,9 +37,7 @@ class ConsoleBootstrapper implements BootstrapperInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function bootstrap(): void
     {
         // Bootstrapp only if the application is running in CLI mode

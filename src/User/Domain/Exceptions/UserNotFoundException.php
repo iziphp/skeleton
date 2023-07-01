@@ -1,13 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Domain\Exceptions;
 
 use Exception;
 use Shared\Domain\ValueObjects\Id;
 use Throwable;
 
+/** @package User\Domain\Exceptions */
 class UserNotFoundException extends Exception
 {
+    /**
+     * @param Id $id 
+     * @param int $code 
+     * @param null|Throwable $previous 
+     * @return void 
+     */
     public function __construct(
         private readonly Id $id,
         int $code = 0,
@@ -23,6 +32,7 @@ class UserNotFoundException extends Exception
         );
     }
 
+    /** @return Id  */
     public function getId(): Id
     {
         return $this->id;

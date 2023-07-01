@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Infrastructure\Bootstrappers;
 
 use Application;
@@ -12,6 +14,13 @@ use Shared\Infrastructure\BootstrapperInterface;
 /** @package Shared\Infrastructure\Bootstrappers */
 class RoutingBootstrapper implements BootstrapperInterface
 {
+    /**
+     * @param Dispatcher $dispatcher 
+     * @param string $routeDir 
+     * @param bool $enableCaching 
+     * @param null|CacheItemPoolInterface $cache 
+     * @return void 
+     */
     public function __construct(
         private Dispatcher $dispatcher,
 
@@ -25,14 +34,13 @@ class RoutingBootstrapper implements BootstrapperInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function bootstrap(): void
     {
         $this->dispatcher->pushMapper($this->getAttributeMapper());
     }
 
+    /** @return AttributeMapper  */
     private function getAttributeMapper(): AttributeMapper
     {
         $mapper = new AttributeMapper($this->cache);

@@ -13,6 +13,7 @@ use User\Domain\Entities\UserEntity;
 use User\Domain\ValueObjects\Email;
 use User\Domain\ValueObjects\SortParameter;
 
+/** @package User\Domain\Repositories */
 interface UserRepositoryInterface extends RepositoryInterface
 {
     /**
@@ -63,6 +64,13 @@ interface UserRepositoryInterface extends RepositoryInterface
      */
     public function createdBefore(DateTimeInterface $date): self;
 
+    /**
+     * @param SortDirection $dir 
+     * @param SliceLimit $limit 
+     * @param null|SortParameter $param 
+     * @param null|UserEntity $cursor 
+     * @return UserRepositoryInterface 
+     */
     public function orderAndSliceAfter(
         SortDirection $dir,
         SliceLimit $limit,
@@ -70,6 +78,13 @@ interface UserRepositoryInterface extends RepositoryInterface
         ?UserEntity $cursor = null
     ): self;
 
+    /**
+     * @param SortDirection $dir 
+     * @param SliceLimit $limit 
+     * @param null|SortParameter $param 
+     * @param null|UserEntity $cursor 
+     * @return UserRepositoryInterface 
+     */
     public function orderAndSliceBefore(
         SortDirection $dir,
         SliceLimit $limit,

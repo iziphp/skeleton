@@ -1,20 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Infrastructure\Bootstrappers;
 
 use Application;
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
 use Easy\Container\Attributes\Inject;
+use ErrorException;
 use Exception;
 use Ramsey\Uuid\Doctrine\UuidBinaryType;
+use RuntimeException;
 use Shared\Infrastructure\BootstrapperInterface;
 
+/** @package Shared\Infrastructure\Bootstrappers */
 class DoctrineBootstrapper implements BootstrapperInterface
 {
+    /**
+     * @param Application $app 
+     * @param string $srcDir 
+     * @param string $proxyDir 
+     * @return void 
+     */
     public function __construct(
         private Application $app,
 
@@ -26,9 +38,7 @@ class DoctrineBootstrapper implements BootstrapperInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function bootstrap(): void
     {
         $params = $this->getConnectionParams();
@@ -45,7 +55,14 @@ class DoctrineBootstrapper implements BootstrapperInterface
         }
     }
 
-    public function getEntityManager(array $params): EntityManagerInterface
+    /**
+     * @param array $params 
+     * @return EntityManagerInterface 
+     * @throws RuntimeException 
+     * @throws ErrorException 
+     * @throws DBALException 
+     */
+    private function getEntityManager(array $params): EntityManagerInterface
     {
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: [$this->srcDir],
@@ -82,10 +99,10 @@ class DoctrineBootstrapper implements BootstrapperInterface
         return $connection;
     }
 
-    /**
+    /** 
      * Get connection config to create MySQL connection
-     *
-     * @return array
+     * 
+     * @return array  
      */
     private function getMysqlConnection(): array
     {

@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use Easy\Container\Container;
 use Easy\Container\Exceptions\NotFoundException;
 use Shared\Infrastructure\BootstrapperInterface;
 use Shared\Infrastructure\ServiceProviderInterface;
 
+/** @package  */
 class Application
 {
     /** @var array<ServiceProviderInterface|string> */

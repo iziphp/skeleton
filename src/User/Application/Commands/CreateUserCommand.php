@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Application\Commands;
 
 use Shared\Infrastructure\CommandBus\Attributes\Handler;
@@ -10,6 +12,7 @@ use User\Domain\ValueObjects\Language;
 use User\Domain\ValueObjects\LastName;
 use User\Domain\ValueObjects\Password;
 
+/** @package User\Application\Commands */
 #[Handler(CreateUserCommandHandler::class)]
 class CreateUserCommand
 {
@@ -19,6 +22,14 @@ class CreateUserCommand
     public LastName $lastName;
     public Language $language;
 
+    /**
+     * @param string $email 
+     * @param string $password 
+     * @param string $firstName 
+     * @param string $lastName 
+     * @param string $language 
+     * @return void 
+     */
     public function __construct(
         string $email,
         string $password,

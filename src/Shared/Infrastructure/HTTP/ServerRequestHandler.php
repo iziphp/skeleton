@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Infrastructure\HTTP;
 
 use Easy\Http\Server\DispatcherInterface;
+use Easy\Http\Server\Exceptions\DispatcherExceptionInterface;
+use Easy\Http\Server\Exceptions\MethodNotAllowedExceptionInterface;
+use Easy\Http\Server\Exceptions\RouteNotFoundExceptionInterface;
 use Easy\HttpServerHandler\HttpServerHandler;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -16,6 +21,13 @@ class ServerRequestHandler implements RequestHandlerInterface
     ) {
     }
 
+    /**
+     * @param ServerRequestInterface $request 
+     * @return ResponseInterface 
+     * @throws DispatcherExceptionInterface 
+     * @throws MethodNotAllowedExceptionInterface 
+     * @throws RouteNotFoundExceptionInterface 
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $route = $this->dispatcher->dispatch($request);

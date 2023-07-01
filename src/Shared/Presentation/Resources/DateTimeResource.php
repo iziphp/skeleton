@@ -1,18 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Presentation\Resources;
 
 use DateTimeInterface;
 use JsonSerializable;
 
+/** @package Shared\Presentation\Resources */
 class DateTimeResource implements JsonSerializable
 {
+    /**
+     * @param null|DateTimeInterface $dateTime 
+     * @return void 
+     */
     public function __construct(
         private ?DateTimeInterface $dateTime
     ) {
     }
 
-    public function jsonSerialize(): mixed
+    /** @inheritDoc */
+    public function jsonSerialize(): ?int
     {
         return $this->dateTime ? $this->dateTime->getTimestamp() : null;
     }

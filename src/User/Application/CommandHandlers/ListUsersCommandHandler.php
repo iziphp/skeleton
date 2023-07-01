@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Application\CommandHandlers;
 
 use Iterator;
@@ -9,8 +11,14 @@ use User\Domain\Entities\UserEntity;
 use User\Domain\Repositories\UserRepositoryInterface;
 use User\Domain\Services\UserReadService;
 
+/** @package User\Application\CommandHandlers */
 class ListUsersCommandHandler
 {
+    /**
+     * @param UserRepositoryInterface $repo 
+     * @param UserReadService $service 
+     * @return void 
+     */
     public function __construct(
         private UserRepositoryInterface $repo,
         private UserReadService $service

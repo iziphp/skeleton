@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shared\Domain\ValueObjects;
 
+/** @package Shared\Domain\ValueObjects */
 enum CursorDirection: string
 {
     case STARTING_AFTER = 'starting_after';

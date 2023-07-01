@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace User\Domain\ValueObjects;
 
+/** @package User\Domain\ValueObjects */
 enum SortParameter: string
 {
     case ID = 'id';

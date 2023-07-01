@@ -11,8 +11,13 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use Shared\Infrastructure\ServiceProviderInterface;
 
+/** @package Shared\Infrastructure\Providers */
 class EventServiceProvider implements ServiceProviderInterface
 {
+    /**
+     * @param ContainerInterface $container 
+     * @return void 
+     */
     public function __construct(
         private ContainerInterface $container
     ) {
