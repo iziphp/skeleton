@@ -4,9 +4,10 @@ namespace User\Domain\ValueObjects;
 
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
+use JsonSerializable;
 
 #[ORM\Embeddable]
-class Language
+class Language implements JsonSerializable
 {
     #[ORM\Column(type: "string", name: "language", length: 5)]
     public readonly string $value;
@@ -23,6 +24,12 @@ class Language
     {
         $this->ensureValueIsValid($value);
         $this->value = $value;
+    }
+
+    /** @inheritDoc */
+    public function jsonSerialize(): string
+    {
+        return $this->value;
     }
 
     /**

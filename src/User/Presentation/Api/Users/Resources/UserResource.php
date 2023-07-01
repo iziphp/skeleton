@@ -13,16 +13,16 @@ class UserResource implements JsonSerializable
     ) {
     }
 
-
+    /** @inheritDoc */
     public function jsonSerialize(): mixed
     {
         $u = $this->user;
 
         return [
-            'id' => $u->getId()->value,
-            'first_name' => $u->getFirstName()->value,
-            'last_name' => $u->getLastName()->value,
-            'email' => $u->getEmail()->value,
+            'id' => $u->getId(),
+            'first_name' => $u->getFirstName(),
+            'last_name' => $u->getLastName(),
+            'email' => $u->getEmail(),
             'created_at' => new DateTimeResource($u->getCreatedAt()),
             'updated_at' => new DateTimeResource($u->getUpdatedAt()),
         ];

@@ -6,10 +6,11 @@ namespace Shared\Domain\ValueObjects;
 
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
+use JsonSerializable;
 
 /** @package Shared\Domain\ValueObjects */
 #[ORM\Embeddable]
-class Email
+class Email implements JsonSerializable
 {
     #[ORM\Column(type: "string", name: "email")]
     public readonly string $value;
@@ -23,6 +24,12 @@ class Email
     {
         $this->ensureValueIsValid($value);
         $this->value = $value;
+    }
+
+    /** @inheritDoc */
+    public function jsonSerialize(): string
+    {
+        return $this->value;
     }
 
     /**

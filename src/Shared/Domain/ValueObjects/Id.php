@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Shared\Domain\ValueObjects;
 
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 use Ramsey\Uuid\Doctrine\UuidV7Generator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 /** @package Shared\Domain\ValueObjects */
 #[ORM\Embeddable]
-class Id
+class Id implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\Column(name: "id", type: "uuid", unique: true)]
@@ -24,5 +25,11 @@ class Id
         $this->value = is_null($value)
             ? Uuid::uuid7()
             : Uuid::fromString($value);
+    }
+
+    /** @inheritDoc */
+    public function jsonSerialize(): string
+    {
+        return $this->value->toString();
     }
 }
