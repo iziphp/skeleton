@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aeeec1faa0933bab4e5e5b62c0cfefd3",
+    "content-hash": "683badf92718866f846c1e7fcb9e0193",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1234,16 +1234,16 @@
         },
         {
             "name": "iziphp/container",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iziphp/container.git",
-                "reference": "926ee792ba660a1515e4f9b5d2471151b2a59921"
+                "reference": "63b3fc4d6da0907331318519634a32ba8c74d7b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iziphp/container/zipball/926ee792ba660a1515e4f9b5d2471151b2a59921",
-                "reference": "926ee792ba660a1515e4f9b5d2471151b2a59921",
+                "url": "https://api.github.com/repos/iziphp/container/zipball/63b3fc4d6da0907331318519634a32ba8c74d7b7",
+                "reference": "63b3fc4d6da0907331318519634a32ba8c74d7b7",
                 "shasum": ""
             },
             "require": {
@@ -1279,9 +1279,9 @@
             "description": "PHP Dependency Container. PSR-11 implementation.",
             "support": {
                 "issues": "https://github.com/iziphp/container/issues",
-                "source": "https://github.com/iziphp/container/tree/v1.0.0"
+                "source": "https://github.com/iziphp/container/tree/v1.1.0"
             },
-            "time": "2023-06-26T15:40:00+00:00"
+            "time": "2023-07-01T09:21:14+00:00"
         },
         {
             "name": "iziphp/emitter",
@@ -4451,16 +4451,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.21",
+            "version": "1.10.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b2a30186be2e4d97dce754ae4e65eb0ec2f04eb5"
+                "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b2a30186be2e4d97dce754ae4e65eb0ec2f04eb5",
-                "reference": "b2a30186be2e4d97dce754ae4e65eb0ec2f04eb5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
+                "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
                 "shasum": ""
             },
             "require": {
@@ -4509,7 +4509,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-21T20:07:58+00:00"
+            "time": "2023-06-30T20:04:11+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

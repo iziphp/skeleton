@@ -21,7 +21,7 @@
         "iziphp/http-response-emitter": "^1.0",
         "iziphp/http-message-util": "^1.0",
         "iziphp/autoloader": "^1.0",
-        "iziphp/container": "^1.0",
+        "iziphp/container": "^1.1",
         "iziphp/http-server-handler": "^1.0",
         "iziphp/router": "^1.0",
         "iziphp/event-dispatcher": "^1.0",
