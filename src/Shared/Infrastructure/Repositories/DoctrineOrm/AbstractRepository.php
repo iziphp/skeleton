@@ -26,8 +26,6 @@ use Shared\Domain\ValueObjects\SortKeyValue;
  */
 abstract class AbstractRepository implements RepositoryInterface
 {
-    /** Doctrine's Entity Manager. Child classes may use it. */
-    protected EntityManagerInterface $em;
     private bool $reverseSort = false;
 
     /**
@@ -46,11 +44,11 @@ abstract class AbstractRepository implements RepositoryInterface
      * @throws RuntimeException
      */
     public function __construct(
-        EntityManagerInterface $em,
-        string $entityClass,
-        string $alias
+        /** Doctrine's Entity Manager. Child classes may use it. */
+        protected EntityManagerInterface $em,
+        private string $entityClass,
+        private string $alias
     ) {
-        $this->em = $em;
         $this->qb = $this->em->createQueryBuilder()
             ->select($alias)
             ->from($entityClass, $alias);
@@ -153,18 +151,18 @@ abstract class AbstractRepository implements RepositoryInterface
     /**
      * ort repo entities and slice after provided cursor
      *
-     * @param string $repoAlias
      * @param SortDirection $dir
      * @param null|SortKeyValue $sortKeyValue
      * @param null|Id $cursorId
      * @return static
      */
     protected function doOrderAndSliceAfter(
-        string $repoAlias,
         SortDirection $dir,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
     ): static {
+        $repoAlias = $this->alias;
+
         return $this->filter(
             static function (QueryBuilder $qb) use (
                 $repoAlias,
@@ -212,19 +210,18 @@ abstract class AbstractRepository implements RepositoryInterface
     /**
      * Sort repo entities and slice before provided cursor
      *
-     * @param string $repoAlias
      * @param SortDirection $dir
      * @param null|SortKeyValue $sortKeyValue
      * @param null|Id $cursorId
      * @return static
      */
-    public function doOrderAndSliceBefore(
-        string $repoAlias,
+    protected function doOrderAndSliceBefore(
         SortDirection $dir,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
     ): static {
         $this->reverseSort = true;
+        $repoAlias = $this->alias;
 
         return $this->filter(
             static function (QueryBuilder $qb) use (

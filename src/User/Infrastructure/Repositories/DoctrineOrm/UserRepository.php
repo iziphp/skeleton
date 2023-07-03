@@ -15,7 +15,6 @@ use InvalidArgumentException;
 use RuntimeException;
 use Shared\Domain\ValueObjects\Id;
 use Shared\Domain\ValueObjects\SortDirection;
-use Shared\Domain\ValueObjects\MaxResults;
 use Shared\Domain\ValueObjects\SortKeyValue;
 use Shared\Infrastructure\Repositories\DoctrineOrm\AbstractRepository;
 use User\Domain\Entities\UserEntity;
@@ -119,7 +118,6 @@ class UserRepository extends AbstractRepository implements
         ?UserEntity $cursor = null
     ): UserRepositoryInterface {
         return $this->doOrderAndSliceAfter(
-            self::ALIAS,
             $dir,
             $param ? $this->getSortKeyValue($param, $cursor) : null,
             $cursor ? $cursor->getId() : null
@@ -133,7 +131,6 @@ class UserRepository extends AbstractRepository implements
         ?UserEntity $cursor = null
     ): UserRepositoryInterface {
         return $this->doOrderAndSliceBefore(
-            self::ALIAS,
             $dir,
             $param ? $this->getSortKeyValue($param, $cursor) : null,
             $cursor ? $cursor->getId() : null
