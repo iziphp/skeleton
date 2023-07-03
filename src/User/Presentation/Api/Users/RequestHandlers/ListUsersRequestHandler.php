@@ -60,7 +60,7 @@ class ListUsersRequestHandler implements RequestHandlerInterface
         }
 
         if ($limit = $request->getQueryParams()['limit'] ?? null) {
-            $cmd->setLimit($limit);
+            $cmd->setLimit((int) $limit);
         }
 
         /** @var Iterator<UserEntity> $users */
