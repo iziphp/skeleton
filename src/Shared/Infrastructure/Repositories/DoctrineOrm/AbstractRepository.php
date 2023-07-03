@@ -6,16 +6,18 @@ namespace Shared\Infrastructure\Repositories\DoctrineOrm;
 
 use ArrayIterator;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use InvalidArgumentException;
 use Iterator;
+use LogicException;
+use Psr\Cache\InvalidArgumentException as CacheInvalidArgumentException;
 use RuntimeException;
 use Shared\Domain\Repositories\RepositoryInterface;
 use Shared\Domain\ValueObjects\Id;
 use Shared\Domain\ValueObjects\MaxResults;
 use Shared\Domain\ValueObjects\SortDirection;
-use Shared\Domain\ValueObjects\SortKeyValue;
 
 /**
  * This abstract DoctrineORM repository is meant to every DDoctrineORM
@@ -26,7 +28,8 @@ use Shared\Domain\ValueObjects\SortKeyValue;
  */
 abstract class AbstractRepository implements RepositoryInterface
 {
-    private bool $reverseSort = false;
+    private ?SortDirection $sortDirection = null;
+    private ?string $sortKey = null;
 
     /**
      * Visibility set to private for not exposing the query builder to child
@@ -59,15 +62,7 @@ abstract class AbstractRepository implements RepositoryInterface
      */
     public function getIterator(): Iterator
     {
-        $iterator = new Paginator($this->qb->getQuery());
-
-        if ($this->reverseSort) {
-            $iterator = new ArrayIterator(
-                array_reverse(iterator_to_array($iterator))
-            );
-        }
-
-        yield from $iterator;
+        yield from new Paginator($this->qb->getQuery());
     }
 
     /**
@@ -110,6 +105,152 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
+     * @param SortDirection $dir 
+     * @param null|string $sortKey 
+     * @return static 
+     */
+    protected function doSort(
+        SortDirection $dir,
+        ?string $sortKey = null
+    ): static {
+        $repoAlias = $this->alias;
+
+        $cloned = $this->filter(
+            static function (QueryBuilder $qb) use ($dir, $sortKey, $repoAlias) {
+                if ($sortKey) {
+                    $qb->orderBy($repoAlias . '.' . $sortKey, $dir->value);
+                }
+
+                $qb->addOrderBy($repoAlias . '.id.value', $dir->value);
+            }
+        );
+
+        $cloned->sortDirection = $dir;
+        $cloned->sortKey = $sortKey;
+
+        return $cloned;
+    }
+
+    /**
+     * @param Id $cursorId 
+     * @param null|string $compareTo 
+     * @return Iterator 
+     * @throws LogicException 
+     * @throws CacheInvalidArgumentException 
+     * @throws ORMException 
+     */
+    protected function doStartingAfter(
+        Id $cursorId,
+        ?string $compareTo = null
+    ): Iterator {
+        $repoAlias = $this->alias;
+        $dir = $this->sortDirection;
+        $sortKey = $this->sortKey;
+
+        $cloned = $this->filter(
+            static function (QueryBuilder $qb) use (
+                $repoAlias,
+                $dir,
+                $sortKey,
+                $compareTo,
+                $cursorId
+            ) {
+                $op = $dir === SortDirection::ASC ? '>' : '<';
+
+                if ($sortKey) {
+                    $qb->andWhere(
+                        $qb->expr()->orX(
+                            $op == '>'
+                                ? $qb->expr()->gt($repoAlias . '.' . $sortKey, ':compareTo')
+                                : $qb->expr()->lt($repoAlias . '.' . $sortKey, ':compareTo'),
+                            $qb->expr()->andX(
+                                $qb->expr()->eq($repoAlias . '.' . $sortKey, ':compareTo'),
+                                $op == '>'
+                                    ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
+                                    : $qb->expr()->lt($repoAlias . '.id.value', ':id')
+                            )
+                        )
+                    )->setParameter('compareTo', $compareTo);
+                } else {
+                    $qb->andWhere(
+                        $op == '>'
+                            ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
+                            : $qb->expr()->lt($repoAlias . '.id.value', ':id')
+                    );
+                }
+
+                $qb->setParameter('id', $cursorId->value->getBytes());
+            }
+        );
+
+        yield from new Paginator($cloned->qb->getQuery());
+    }
+
+    /**
+     * @param Id $cursorId 
+     * @param null|string $compareTo 
+     * @return Iterator 
+     */
+    protected function doEndingBefore(
+        Id $cursorId,
+        ?string $compareTo = null
+    ): Iterator {
+        $repoAlias = $this->alias;
+        $dir = $this->sortDirection;
+        $sortKey = $this->sortKey;
+
+        $cloned = $this->filter(
+            static function (QueryBuilder $qb) use (
+                $repoAlias,
+                $dir,
+                $sortKey,
+                $compareTo,
+                $cursorId
+            ) {
+                if ($sortKey) {
+                    $qb->orderBy($repoAlias . '.' . $sortKey, $dir->getOpposite()->value);
+                    $qb->addOrderBy($repoAlias . '.id.value', $dir->getOpposite()->value);
+                } else {
+                    $qb->orderBy($repoAlias . '.id.value', $dir->getOpposite()->value);
+                }
+
+                $op = $dir->getOpposite() === SortDirection::ASC ? '>' : '<';
+
+                if ($sortKey) {
+                    $qb->andWhere(
+                        $qb->expr()->orX(
+                            $op == '>'
+                                ? $qb->expr()->gt($repoAlias . '.' . $sortKey, ':compareTo')
+                                : $qb->expr()->lt($repoAlias . '.' . $sortKey, ':compareTo'),
+                            $qb->expr()->andX(
+                                $qb->expr()->eq($repoAlias . '.' . $sortKey, ':compareTo'),
+                                $op == '>'
+                                    ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
+                                    : $qb->expr()->lt($repoAlias . '.id.value', ':id')
+                            )
+                        )
+                    )->setParameter('compareTo', $compareTo);
+                } else {
+                    $qb->andWhere(
+                        $op == '>'
+                            ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
+                            : $qb->expr()->lt($repoAlias . '.id.value', ':id')
+                    );
+                }
+
+                $qb->setParameter('id', $cursorId->value->getBytes());
+            }
+        );
+
+        $iterator = new Paginator($cloned->qb->getQuery());
+        $iterator = new ArrayIterator(
+            array_reverse(iterator_to_array($iterator))
+        );
+
+        yield from $iterator;
+    }
+
+    /**
      * Filters the repository using the query builder
      *
      * Clones this repository and returns the new instance with the modified
@@ -146,130 +287,5 @@ abstract class AbstractRepository implements RepositoryInterface
     protected function __clone()
     {
         $this->qb = clone $this->qb;
-    }
-
-    /**
-     * ort repo entities and slice after provided cursor
-     *
-     * @param SortDirection $dir
-     * @param null|SortKeyValue $sortKeyValue
-     * @param null|Id $cursorId
-     * @return static
-     */
-    protected function doSortAndStartAfter(
-        SortDirection $dir,
-        ?SortKeyValue $sortKeyValue = null,
-        ?Id $cursorId = null
-    ): static {
-        $repoAlias = $this->alias;
-
-        return $this->filter(
-            static function (QueryBuilder $qb) use (
-                $repoAlias,
-                $dir,
-                $sortKeyValue,
-                $cursorId
-            ) {
-                if ($sortKeyValue) {
-                    $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->value);
-                }
-
-                $qb->addOrderBy($repoAlias . '.id.value', $dir->value);
-
-                if ($cursorId) {
-                    $op = $dir === SortDirection::ASC ? '>' : '<';
-
-                    if ($sortKeyValue) {
-                        $qb->andWhere(
-                            $qb->expr()->orX(
-                                $op == '>'
-                                    ? $qb->expr()->gt($repoAlias . '.' . $sortKeyValue->key, ':sortParam')
-                                    : $qb->expr()->lt($repoAlias . '.' . $sortKeyValue->key, ':sortParam'),
-                                $qb->expr()->andX(
-                                    $qb->expr()->eq($repoAlias . '.' . $sortKeyValue->key, ':sortParam'),
-                                    $op == '>'
-                                        ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
-                                        : $qb->expr()->lt($repoAlias . '.id.value', ':id')
-                                )
-                            )
-                        )->setParameter('sortParam', $sortKeyValue->value);
-                    } else {
-                        $qb->andWhere(
-                            $op == '>'
-                                ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
-                                : $qb->expr()->lt($repoAlias . '.id.value', ':id')
-                        );
-                    }
-
-                    $qb->setParameter('id', $cursorId->value->getBytes());
-                }
-            }
-        );
-    }
-
-    /**
-     * Sort repo entities and slice before provided cursor
-     *
-     * @param SortDirection $dir
-     * @param null|SortKeyValue $sortKeyValue
-     * @param null|Id $cursorId
-     * @return static
-     */
-    protected function doSortAndEndBefore(
-        SortDirection $dir,
-        ?SortKeyValue $sortKeyValue = null,
-        ?Id $cursorId = null
-    ): static {
-        $this->reverseSort = true;
-        $repoAlias = $this->alias;
-
-        return $this->filter(
-            static function (QueryBuilder $qb) use (
-                $repoAlias,
-                $dir,
-                $sortKeyValue,
-                $cursorId
-            ) {
-                if ($cursorId) {
-                    if ($sortKeyValue) {
-                        $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->getOpposite()->value);
-                    }
-
-                    $qb->addOrderBy($repoAlias . '.id.value', $dir->getOpposite()->value);
-
-                    $op = $dir->getOpposite() === SortDirection::ASC ? '>' : '<';
-
-                    if ($sortKeyValue) {
-                        $qb->andWhere(
-                            $qb->expr()->orX(
-                                $op == '>'
-                                    ? $qb->expr()->gt($repoAlias . '.' . $sortKeyValue->key, ':sortParam')
-                                    : $qb->expr()->lt($repoAlias . '.' . $sortKeyValue->key, ':sortParam'),
-                                $qb->expr()->andX(
-                                    $qb->expr()->eq($repoAlias . '.' . $sortKeyValue->key, ':sortParam'),
-                                    $op == '>'
-                                        ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
-                                        : $qb->expr()->lt($repoAlias . '.id.value', ':id')
-                                )
-                            )
-                        )->setParameter('sortParam', $sortKeyValue->value);
-                    } else {
-                        $qb->andWhere(
-                            $op == '>'
-                                ? $qb->expr()->gt($repoAlias . '.id.value', ':id')
-                                : $qb->expr()->lt($repoAlias . '.id.value', ':id')
-                        );
-                    }
-
-                    $qb->setParameter('id', $cursorId->value->getBytes());
-                } else {
-                    if ($sortKeyValue) {
-                        $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->value);
-                    }
-
-                    $qb->addOrderBy($repoAlias . '.id.value', $dir->value);
-                }
-            }
-        );
     }
 }

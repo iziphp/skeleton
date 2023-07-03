@@ -16,7 +16,7 @@ use User\Domain\ValueObjects\SortParameter;
 #[Handler(ListUsersCommandHandler::class)]
 class ListUsersCommand
 {
-    public ?SortParameter $orderBy = null;
+    public ?SortParameter $sortParameter = null;
     public SortDirection $sortDirection = SortDirection::DESC;
     public ?Id $cursor = null;
     public ?MaxResults $maxResults;
@@ -35,7 +35,7 @@ class ListUsersCommand
      */
     public function setOrderBy(string $orderBy, string $dir): void
     {
-        $this->orderBy =  SortParameter::from($orderBy);
+        $this->sortParameter =  SortParameter::from($orderBy);
         $this->sortDirection = SortDirection::from(strtoupper($dir));
     }
 

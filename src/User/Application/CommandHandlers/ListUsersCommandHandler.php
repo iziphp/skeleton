@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace User\Application\CommandHandlers;
 
-use Iterator;
 use Shared\Domain\ValueObjects\CursorDirection;
+use Traversable;
 use User\Application\Commands\ListUsersCommand;
 use User\Domain\Entities\UserEntity;
 use User\Domain\Repositories\UserRepositoryInterface;
@@ -27,34 +27,29 @@ class ListUsersCommandHandler
 
     /**
      * @param ListUsersCommand $cmd
-     * @return Iterator<UserEntity>
+     * @return Traversable<UserEntity>
      */
-    public function handle(ListUsersCommand $cmd): Iterator
+    public function handle(ListUsersCommand $cmd): Traversable
     {
         $user = $cmd->cursor
             ? $this->service->findUserOrFail($cmd->cursor)
             : null;
 
-        $users = $this->repo;
+        $users = $this->repo
+            ->sort($cmd->sortDirection, $cmd->sortParameter);
 
         if ($cmd->maxResults) {
             $users = $users->setMaxResults($cmd->maxResults);
         }
 
-        if ($cmd->cursorDirection == CursorDirection::ENDING_BEFORE) {
-            $users = $users->sortAndEndBefore(
-                $cmd->sortDirection,
-                $cmd->orderBy,
-                $user
-            );
-        } else {
-            $users = $users->sortAndStartAfter(
-                $cmd->sortDirection,
-                $cmd->orderBy,
-                $user
-            );
+        if ($user) {
+            if ($cmd->cursorDirection == CursorDirection::ENDING_BEFORE) {
+                return $users = $users->endingBefore($user);
+            }
+
+            return $users->startingAfter($user);
         }
 
-        return $users->getIterator();
+        return $users;
     }
 }

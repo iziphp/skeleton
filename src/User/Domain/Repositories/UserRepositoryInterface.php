@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace User\Domain\Repositories;
 
 use DateTimeInterface;
+use Iterator;
 use Shared\Domain\Repositories\RepositoryInterface;
 use Shared\Domain\ValueObjects\Id;
 use Shared\Domain\ValueObjects\SortDirection;
@@ -12,7 +13,10 @@ use User\Domain\Entities\UserEntity;
 use User\Domain\ValueObjects\Email;
 use User\Domain\ValueObjects\SortParameter;
 
-/** @package User\Domain\Repositories */
+/** 
+ * @implements RepositoryInterface<UserEntity>
+ * @package User\Domain\Repositories 
+ */
 interface UserRepositoryInterface extends RepositoryInterface
 {
     /**
@@ -64,26 +68,24 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function createdBefore(DateTimeInterface $date): self;
 
     /**
-     * @param SortDirection $dir
-     * @param null|SortParameter $param
-     * @param null|UserEntity $cursor
-     * @return UserRepositoryInterface
+     * @param SortDirection $dir 
+     * @param null|SortParameter $sortParameter
+     * @return static 
      */
-    public function sortAndStartAfter(
+    public function sort(
         SortDirection $dir,
-        ?SortParameter $param = null,
-        ?UserEntity $cursor = null
-    ): self;
+        ?SortParameter $sortParameter = null
+    ): static;
 
     /**
-     * @param SortDirection $dir
-     * @param null|SortParameter $param
-     * @param null|UserEntity $cursor
-     * @return UserRepositoryInterface
+     * @param UserEntity $cursor 
+     * @return Iterator<UserEntity> 
      */
-    public function sortAndEndBefore(
-        SortDirection $dir,
-        ?SortParameter $param = null,
-        ?UserEntity $cursor = null
-    ): self;
+    public function startingAfter(UserEntity $cursor): Iterator;
+
+    /**
+     * @param UserEntity $cursor 
+     * @return Iterator<UserEntity> 
+     */
+    public function endingBefore(UserEntity $cursor): Iterator;
 }

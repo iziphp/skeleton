@@ -15,7 +15,7 @@ use Shared\Domain\ValueObjects\MaxResults;
  * This interface consist of the common methods which might be availabke in
  * actual repository interfaces. Repositories should not implement this
  * interface directly. Actualy repository interfaces may extend this interface.
- *
+ * 
  * @package Shared\Domain\Repositories
  */
 interface RepositoryInterface extends IteratorAggregate, Countable

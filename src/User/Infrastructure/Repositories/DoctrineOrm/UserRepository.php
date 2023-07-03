@@ -12,10 +12,10 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use DomainException;
 use InvalidArgumentException;
+use Iterator;
 use RuntimeException;
 use Shared\Domain\ValueObjects\Id;
 use Shared\Domain\ValueObjects\SortDirection;
-use Shared\Domain\ValueObjects\SortKeyValue;
 use Shared\Infrastructure\Repositories\DoctrineOrm\AbstractRepository;
 use User\Domain\Entities\UserEntity;
 use User\Domain\Repositories\UserRepositoryInterface;
@@ -26,8 +26,9 @@ use User\Domain\ValueObjects\SortParameter;
 class UserRepository extends AbstractRepository implements
     UserRepositoryInterface
 {
-    protected const ENTITY_CLASS = UserEntity::class;
-    protected const ALIAS = 'user';
+    private const ENTITY_CLASS = UserEntity::class;
+    private const ALIAS = 'user';
+    private ?SortParameter $sortParameter = null;
 
     /**
      * @param EntityManagerInterface $em
@@ -112,61 +113,64 @@ class UserRepository extends AbstractRepository implements
     }
 
     /** @inheritDoc */
-    public function sortAndStartAfter(
+    public function sort(
         SortDirection $dir,
-        ?SortParameter $param = null,
-        ?UserEntity $cursor = null
-    ): UserRepositoryInterface {
-        return $this->doSortAndStartAfter(
-            $dir,
-            $param ? $this->getSortKeyValue($param, $cursor) : null,
-            $cursor ? $cursor->getId() : null
+        ?SortParameter $sortParameter = null
+    ): static {
+        $cloned = $this->doSort($dir, $this->getSortKey($sortParameter));
+        $cloned->sortParameter = $sortParameter;
+
+        return $cloned;
+    }
+
+    /** @inheritDoc */
+    public function startingAfter(UserEntity $cursor): Iterator
+    {
+        return $this->doStartingAfter(
+            $cursor->getId(),
+            $this->getCompareValue($cursor)
         );
     }
 
     /** @inheritDoc */
-    public function sortAndEndBefore(
-        SortDirection $dir,
-        ?SortParameter $param = null,
-        ?UserEntity $cursor = null
-    ): UserRepositoryInterface {
-        return $this->doSortAndEndBefore(
-            $dir,
-            $param ? $this->getSortKeyValue($param, $cursor) : null,
-            $cursor ? $cursor->getId() : null
+    public function endingBefore(UserEntity $cursor): Iterator
+    {
+        return $this->doEndingBefore(
+            $cursor->getId(),
+            $this->getCompareValue($cursor)
         );
     }
 
     /**
      * @param SortParameter $param 
-     * @param null|UserEntity $cursor 
-     * @return SortKeyValue 
+     * @return null|string 
      */
-    private function getSortKeyValue(
-        SortParameter $param,
-        ?UserEntity $cursor
-    ): SortKeyValue {
+    private function getSortKey(
+        ?SortParameter $param
+    ): ?string {
         return match ($param) {
-            SortParameter::ID => new SortKeyValue(
-                'id.value',
-                $cursor?->getId()->value->getBytes(),
-            ),
-            SortParameter::FIRST_NAME => new SortKeyValue(
-                'firstName.value',
-                $cursor?->getFirstName()->value,
-            ),
-            SortParameter::LAST_NAME => new SortKeyValue(
-                'lastName.value',
-                $cursor?->getLastName()->value
-            ),
-            SortParameter::CREATED_AT => new SortKeyValue(
-                'createdAt',
-                $cursor?->getCreatedAt()
-            ),
-            SortParameter::UPDATED_AT => new SortKeyValue(
-                'updatedAt',
-                $cursor?->getUpdatedAt()
-            )
+            SortParameter::ID => 'id.value',
+            SortParameter::FIRST_NAME => 'firstName.value',
+            SortParameter::LAST_NAME => 'lastName.value',
+            SortParameter::CREATED_AT => 'createdAt',
+            SortParameter::UPDATED_AT => 'updatedAt',
+            default => null
+        };
+    }
+
+    /**
+     * @param UserEntity $cursor 
+     * @return null|string 
+     */
+    private function getCompareValue(UserEntity $cursor): ?string
+    {
+        return match ($this->sortParameter) {
+            SortParameter::ID => $cursor->getId()->value->getBytes(),
+            SortParameter::FIRST_NAME => $cursor->getFirstName()->value,
+            SortParameter::LAST_NAME => $cursor->getLastName()->value,
+            SortParameter::CREATED_AT => $cursor->getCreatedAt(),
+            SortParameter::UPDATED_AT => $cursor->getUpdatedAt(),
+            default => null
         };
     }
 }
