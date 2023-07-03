@@ -6,7 +6,7 @@ namespace User\Application\Commands;
 
 use Shared\Domain\ValueObjects\CursorDirection;
 use Shared\Domain\ValueObjects\Id;
-use Shared\Domain\ValueObjects\SliceLimit;
+use Shared\Domain\ValueObjects\MaxResults;
 use Shared\Domain\ValueObjects\SortDirection;
 use Shared\Infrastructure\CommandBus\Attributes\Handler;
 use User\Application\CommandHandlers\ListUsersCommandHandler;
@@ -19,13 +19,13 @@ class ListUsersCommand
     public ?SortParameter $orderBy = null;
     public SortDirection $sortDirection = SortDirection::DESC;
     public ?Id $cursor = null;
-    public ?SliceLimit $limit;
+    public ?MaxResults $maxResults;
     public CursorDirection $cursorDirection = CursorDirection::STARTING_AFTER;
 
     /** @return void  */
     public function __construct()
     {
-        $this->limit = new SliceLimit(SliceLimit::DEFAULT);
+        $this->maxResults = new MaxResults(MaxResults::DEFAULT);
     }
 
     /**
@@ -58,7 +58,7 @@ class ListUsersCommand
      */
     public function setLimit(int $limit): self
     {
-        $this->limit = new SliceLimit($limit);
+        $this->maxResults = new MaxResults($limit);
 
         return $this;
     }

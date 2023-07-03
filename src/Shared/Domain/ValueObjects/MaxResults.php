@@ -7,16 +7,16 @@ namespace Shared\Domain\ValueObjects;
 use InvalidArgumentException;
 
 /** @package Shared\Domain\ValueObjects */
-class SliceLimit
+class MaxResults
 {
     public const MAX = 250;
     public const DEFAULT = 25;
     public readonly int $value;
 
-    /** @return SliceLimit  */
-    public static function withDefaultValue(): SliceLimit
+    /** @return MaxResults  */
+    public static function withDefaultValue(): MaxResults
     {
-        return new SliceLimit(self::DEFAULT);
+        return new MaxResults(self::DEFAULT);
     }
 
     /**

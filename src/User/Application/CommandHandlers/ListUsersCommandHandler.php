@@ -37,8 +37,8 @@ class ListUsersCommandHandler
 
         $users = $this->repo;
 
-        if ($cmd->limit) {
-            $users = $users->setSliceLimit($cmd->limit);
+        if ($cmd->maxResults) {
+            $users = $users->setMaxResults($cmd->maxResults);
         }
 
         if ($cmd->cursorDirection == CursorDirection::ENDING_BEFORE) {

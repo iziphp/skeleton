@@ -15,7 +15,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use Shared\Domain\ValueObjects\Id;
 use Shared\Domain\ValueObjects\SortDirection;
-use Shared\Domain\ValueObjects\SliceLimit;
+use Shared\Domain\ValueObjects\MaxResults;
 use Shared\Domain\ValueObjects\SortKeyValue;
 use Shared\Infrastructure\Repositories\DoctrineOrm\AbstractRepository;
 use User\Domain\Entities\UserEntity;

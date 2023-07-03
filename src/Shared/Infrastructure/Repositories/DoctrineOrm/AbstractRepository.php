@@ -13,7 +13,7 @@ use Iterator;
 use RuntimeException;
 use Shared\Domain\Repositories\RepositoryInterface;
 use Shared\Domain\ValueObjects\Id;
-use Shared\Domain\ValueObjects\SliceLimit;
+use Shared\Domain\ValueObjects\MaxResults;
 use Shared\Domain\ValueObjects\SortDirection;
 use Shared\Domain\ValueObjects\SortKeyValue;
 
@@ -102,11 +102,11 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /** @inheritDoc */
-    public function setSliceLimit(SliceLimit $limit): static
+    public function setMaxResults(MaxResults $maxResults): static
     {
         return $this->filter(
-            static function (QueryBuilder $qb) use ($limit) {
-                $qb->setMaxResults($limit->value);
+            static function (QueryBuilder $qb) use ($maxResults) {
+                $qb->setMaxResults($maxResults->value);
             }
         );
     }

@@ -7,7 +7,7 @@ namespace Shared\Domain\Repositories;
 use Countable;
 use Iterator;
 use IteratorAggregate;
-use Shared\Domain\ValueObjects\SliceLimit;
+use Shared\Domain\ValueObjects\MaxResults;
 
 /**
  * Base repository interface.
@@ -53,8 +53,8 @@ interface RepositoryInterface extends IteratorAggregate, Countable
     public function flush(): void;
 
     /**
-     * @param SliceLimit $limit 
+     * @param MaxResults $maxResults 
      * @return static 
      */
-    public function setSliceLimit(SliceLimit $limit): static;
+    public function setMaxResults(MaxResults $maxResults): static;
 }

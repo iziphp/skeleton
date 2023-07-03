@@ -7,7 +7,7 @@ namespace User\Domain\Repositories;
 use DateTimeInterface;
 use Shared\Domain\Repositories\RepositoryInterface;
 use Shared\Domain\ValueObjects\Id;
-use Shared\Domain\ValueObjects\SliceLimit;
+use Shared\Domain\ValueObjects\MaxResults;
 use Shared\Domain\ValueObjects\SortDirection;
 use User\Domain\Entities\UserEntity;
 use User\Domain\ValueObjects\Email;
