@@ -112,12 +112,12 @@ class UserRepository extends AbstractRepository implements
     }
 
     /** @inheritDoc */
-    public function orderAndSliceAfter(
+    public function sortAndStartAfter(
         SortDirection $dir,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
     ): UserRepositoryInterface {
-        return $this->doOrderAndSliceAfter(
+        return $this->doSortAndStartAfter(
             $dir,
             $param ? $this->getSortKeyValue($param, $cursor) : null,
             $cursor ? $cursor->getId() : null
@@ -125,12 +125,12 @@ class UserRepository extends AbstractRepository implements
     }
 
     /** @inheritDoc */
-    public function orderAndSliceBefore(
+    public function sortAndEndBefore(
         SortDirection $dir,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
     ): UserRepositoryInterface {
-        return $this->doOrderAndSliceBefore(
+        return $this->doSortAndEndBefore(
             $dir,
             $param ? $this->getSortKeyValue($param, $cursor) : null,
             $cursor ? $cursor->getId() : null

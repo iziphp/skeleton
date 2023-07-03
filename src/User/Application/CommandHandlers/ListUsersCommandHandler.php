@@ -42,13 +42,13 @@ class ListUsersCommandHandler
         }
 
         if ($cmd->cursorDirection == CursorDirection::ENDING_BEFORE) {
-            $users = $users->orderAndSliceBefore(
+            $users = $users->sortAndEndBefore(
                 $cmd->sortDirection,
                 $cmd->orderBy,
                 $user
             );
         } else {
-            $users = $users->orderAndSliceAfter(
+            $users = $users->sortAndStartAfter(
                 $cmd->sortDirection,
                 $cmd->orderBy,
                 $user

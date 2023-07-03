@@ -156,7 +156,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param null|Id $cursorId
      * @return static
      */
-    protected function doOrderAndSliceAfter(
+    protected function doSortAndStartAfter(
         SortDirection $dir,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
@@ -215,7 +215,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param null|Id $cursorId
      * @return static
      */
-    protected function doOrderAndSliceBefore(
+    protected function doSortAndEndBefore(
         SortDirection $dir,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null

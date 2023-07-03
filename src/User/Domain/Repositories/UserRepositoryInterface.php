@@ -69,7 +69,7 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @param null|UserEntity $cursor
      * @return UserRepositoryInterface
      */
-    public function orderAndSliceAfter(
+    public function sortAndStartAfter(
         SortDirection $dir,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
@@ -81,7 +81,7 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @param null|UserEntity $cursor
      * @return UserRepositoryInterface
      */
-    public function orderAndSliceBefore(
+    public function sortAndEndBefore(
         SortDirection $dir,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
