@@ -112,36 +112,39 @@ class UserRepository extends AbstractRepository implements
         });
     }
 
+    /** @inheritDoc */
     public function orderAndSliceAfter(
         SortDirection $dir,
-        SliceLimit $limit,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
     ): UserRepositoryInterface {
         return $this->doOrderAndSliceAfter(
             self::ALIAS,
             $dir,
-            $limit,
             $param ? $this->getSortKeyValue($param, $cursor) : null,
             $cursor ? $cursor->getId() : null
         );
     }
 
+    /** @inheritDoc */
     public function orderAndSliceBefore(
         SortDirection $dir,
-        SliceLimit $limit,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
     ): UserRepositoryInterface {
         return $this->doOrderAndSliceBefore(
             self::ALIAS,
             $dir,
-            $limit,
             $param ? $this->getSortKeyValue($param, $cursor) : null,
             $cursor ? $cursor->getId() : null
         );
     }
 
+    /**
+     * @param SortParameter $param 
+     * @param null|UserEntity $cursor 
+     * @return SortKeyValue 
+     */
     private function getSortKeyValue(
         SortParameter $param,
         ?UserEntity $cursor

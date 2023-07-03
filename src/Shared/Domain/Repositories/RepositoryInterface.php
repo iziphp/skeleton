@@ -7,6 +7,7 @@ namespace Shared\Domain\Repositories;
 use Countable;
 use Iterator;
 use IteratorAggregate;
+use Shared\Domain\ValueObjects\SliceLimit;
 
 /**
  * Base repository interface.
@@ -50,4 +51,10 @@ interface RepositoryInterface extends IteratorAggregate, Countable
      * @return void
      */
     public function flush(): void;
+
+    /**
+     * @param SliceLimit $limit 
+     * @return static 
+     */
+    public function setSliceLimit(SliceLimit $limit): static;
 }

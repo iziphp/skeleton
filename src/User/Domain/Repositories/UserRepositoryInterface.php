@@ -66,28 +66,24 @@ interface UserRepositoryInterface extends RepositoryInterface
 
     /**
      * @param SortDirection $dir
-     * @param SliceLimit $limit
      * @param null|SortParameter $param
      * @param null|UserEntity $cursor
      * @return UserRepositoryInterface
      */
     public function orderAndSliceAfter(
         SortDirection $dir,
-        SliceLimit $limit,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
     ): self;
 
     /**
      * @param SortDirection $dir
-     * @param SliceLimit $limit
      * @param null|SortParameter $param
      * @param null|UserEntity $cursor
      * @return UserRepositoryInterface
      */
     public function orderAndSliceBefore(
         SortDirection $dir,
-        SliceLimit $limit,
         ?SortParameter $param = null,
         ?UserEntity $cursor = null
     ): self;

@@ -101,6 +101,16 @@ abstract class AbstractRepository implements RepositoryInterface
         $this->em->flush();
     }
 
+    /** @inheritDoc */
+    public function setSliceLimit(SliceLimit $limit): static
+    {
+        return $this->filter(
+            static function (QueryBuilder $qb) use ($limit) {
+                $qb->setMaxResults($limit->value);
+            }
+        );
+    }
+
     /**
      * Filters the repository using the query builder
      *
@@ -145,7 +155,6 @@ abstract class AbstractRepository implements RepositoryInterface
      *
      * @param string $repoAlias
      * @param SortDirection $dir
-     * @param SliceLimit $limit
      * @param null|SortKeyValue $sortKeyValue
      * @param null|Id $cursorId
      * @return static
@@ -153,7 +162,6 @@ abstract class AbstractRepository implements RepositoryInterface
     protected function doOrderAndSliceAfter(
         string $repoAlias,
         SortDirection $dir,
-        SliceLimit $limit,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
     ): static {
@@ -161,7 +169,6 @@ abstract class AbstractRepository implements RepositoryInterface
             static function (QueryBuilder $qb) use (
                 $repoAlias,
                 $dir,
-                $limit,
                 $sortKeyValue,
                 $cursorId
             ) {
@@ -169,8 +176,7 @@ abstract class AbstractRepository implements RepositoryInterface
                     $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->value);
                 }
 
-                $qb->addOrderBy($repoAlias . '.id.value', $dir->value)
-                    ->setMaxResults($limit->value);
+                $qb->addOrderBy($repoAlias . '.id.value', $dir->value);
 
                 if ($cursorId) {
                     $op = $dir === SortDirection::ASC ? '>' : '<';
@@ -208,7 +214,6 @@ abstract class AbstractRepository implements RepositoryInterface
      *
      * @param string $repoAlias
      * @param SortDirection $dir
-     * @param SliceLimit $limit
      * @param null|SortKeyValue $sortKeyValue
      * @param null|Id $cursorId
      * @return static
@@ -216,7 +221,6 @@ abstract class AbstractRepository implements RepositoryInterface
     public function doOrderAndSliceBefore(
         string $repoAlias,
         SortDirection $dir,
-        SliceLimit $limit,
         ?SortKeyValue $sortKeyValue = null,
         ?Id $cursorId = null
     ): static {
@@ -226,7 +230,6 @@ abstract class AbstractRepository implements RepositoryInterface
             static function (QueryBuilder $qb) use (
                 $repoAlias,
                 $dir,
-                $limit,
                 $sortKeyValue,
                 $cursorId
             ) {
@@ -235,8 +238,7 @@ abstract class AbstractRepository implements RepositoryInterface
                         $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->getOpposite()->value);
                     }
 
-                    $qb->addOrderBy($repoAlias . '.id.value', $dir->getOpposite()->value)
-                        ->setMaxResults($limit->value);
+                    $qb->addOrderBy($repoAlias . '.id.value', $dir->getOpposite()->value);
 
                     $op = $dir->getOpposite() === SortDirection::ASC ? '>' : '<';
 
@@ -268,8 +270,7 @@ abstract class AbstractRepository implements RepositoryInterface
                         $qb->orderBy($repoAlias . '.' . $sortKeyValue->key, $dir->value);
                     }
 
-                    $qb->addOrderBy($repoAlias . '.id.value', $dir->value)
-                        ->setMaxResults($limit->value);
+                    $qb->addOrderBy($repoAlias . '.id.value', $dir->value);
                 }
             }
         );

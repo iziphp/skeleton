@@ -37,17 +37,19 @@ class ListUsersCommandHandler
 
         $users = $this->repo;
 
+        if ($cmd->limit) {
+            $users = $users->setSliceLimit($cmd->limit);
+        }
+
         if ($cmd->cursorDirection == CursorDirection::ENDING_BEFORE) {
             $users = $users->orderAndSliceBefore(
                 $cmd->sortDirection,
-                $cmd->limit,
                 $cmd->orderBy,
                 $user
             );
         } else {
             $users = $users->orderAndSliceAfter(
                 $cmd->sortDirection,
-                $cmd->limit,
                 $cmd->orderBy,
                 $user
             );
