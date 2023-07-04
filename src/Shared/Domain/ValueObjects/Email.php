@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shared\Domain\ValueObjects;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
 use JsonSerializable;
@@ -12,7 +13,7 @@ use JsonSerializable;
 #[ORM\Embeddable]
 class Email implements JsonSerializable
 {
-    #[ORM\Column(type: "string", name: "email")]
+    #[ORM\Column(type: Types::STRING, name: "email")]
     public readonly string $value;
 
     /**
